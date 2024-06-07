@@ -143,6 +143,10 @@ return(
     <td>{receipt.id}</td>
   </tr>
   <tr>
+    <td>Date</td>
+    <td>{receipt.date}</td>
+  </tr>
+  <tr>
     <td>Headline</td>
     <td>{receipt.name}</td>
   </tr>

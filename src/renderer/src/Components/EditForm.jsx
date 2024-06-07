@@ -127,7 +127,7 @@ setreceipt({...receipt,"total":grandTotal})
     // Grand Total with Taxes
   }
   totalCostProducts();
-}, [products, receipt.tax_Amount]);
+}, [products, grandTotal, receipt.tax_Amount]);
 
 
 
