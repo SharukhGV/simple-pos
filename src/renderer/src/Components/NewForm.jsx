@@ -204,7 +204,7 @@ function NewForm() {
         </Link>
 </div>
 </div>
-<div style={{border:"solid white"}} className="calculations">
+<div style={{border:"solid white", backgroundColor:"darkblue"}} className="calculations">
           <h3>GRAND TOTAL</h3> 
           <h3><strong>${grandTotal}</strong></h3>
           <br></br>
@@ -215,7 +215,7 @@ function NewForm() {
           <input type="text" onChange={handleChangeAmount} value={change}></input>
 <br></br>
           <h3>Change to Give Back:</h3>
-          <h3 style={{color:"orange"}}> ${changetoGiveBack()}</h3>
+          <h3 style={{color:"yellowgreen"}}> ${changetoGiveBack()}</h3>
 </div>
         </div>
 
