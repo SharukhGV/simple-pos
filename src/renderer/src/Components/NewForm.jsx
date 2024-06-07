@@ -13,6 +13,7 @@ function NewForm() {
   
   const [receipt, setreceipt] = useState({
     id: uuidv4(),
+    name:"",
     product_list: [products],
     total: grandTotal,
     date: date7,

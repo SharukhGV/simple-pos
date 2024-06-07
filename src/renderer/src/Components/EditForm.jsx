@@ -1,11 +1,14 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 import moment from "moment";
 
 
 function EditForm() {
   let { id } = useParams();
+  const [products, setProducts] = useState([]);
+  const [grandTotal, setGrandTotal] = useState(0)
+
   function getObjectSpecific(objects, id) {
     let targetObject = null;
 
@@ -22,29 +25,66 @@ function EditForm() {
       return null;
     }
   }
+
   
   let newObj = JSON.parse(window.localStorage.getItem("dataJSON"));
-  let dreams = getObjectSpecific(newObj, id);
-  const [dream, setdream] = useState({
-    id: dreams.id,
-    name: dreams.name,
-    good_dream: dreams.good_dream,
-    dream_description: dreams.dream_description,
-    topic: dreams.topic,
-    date: dreams.date,
-    night: dreams.night,
+  let receipts = getObjectSpecific(newObj, id);
+  const [receipt, setreceipt] = useState({
+    id: receipts.id,
+    name:receipts.name,
+    product_list:[...receipts.product_list],
+    total: receipts.total,
+    date: receipts.date,
+    tax_Amount: receipts.tax_Amount,
+    receipt_description: receipts.receipt_description
   });
 
+  useEffect(()=>{
+setProducts([...receipts.product_list])
+
+  },[])
+  const handleTextChange = (e, fieldName, index) => {
+    const value = e.target.value;
+
+    if (fieldName === 'name') {
+      setreceipt({ ...receipt, [fieldName]: value });
+    } else if (fieldName === 'date') {
+      setreceipt({ ...receipt, [fieldName]: new Date(value) });
+    } else if (fieldName === 'tax_Amount') {
+      setreceipt({ ...receipt, [fieldName]:value });
+    } else if (fieldName === 'receipt_description') {
+      setreceipt({ ...receipt, [fieldName]: value });
+    } 
+    else if (fieldName === 'productName') {
+      const updatedProducts = [...products];
+      updatedProducts[index].name = value;
+      setProducts(updatedProducts);      
+      setreceipt({...receipt, 'product_list':[...products]})
+
+    } else if (fieldName === 'productCost') {
+      const updatedProducts = [...products];
+      updatedProducts[index].cost = parseFloat(value);
+      setProducts(updatedProducts);
+      setreceipt({...receipt, 'product_list':[...products]})
+
+    } else if (fieldName === 'taxable') {
+      const updatedProducts = [...products];
+      updatedProducts[index].taxable = value === 'true';
+      setProducts(updatedProducts);
+      setreceipt({...receipt, 'product_list':[...products]})
+
+    }
+  };
 
   const navigate = useNavigate();
 
 
-  const handleTextChange = (event) => {
+  // const handleTextChange = (event) => {
    
-    setdream({ ...dream, [event.target.id]: event.target.value });
-  };
+  //   setreceipt({ ...receipt, [event.target.id]: event.target.value });
+  // };
 
-function editObjectDream(){
+function editObjectreceipt(){
 
   const existingArray = JSON.parse(window.localStorage.getItem('dataJSON')) || [];
 
@@ -52,7 +92,7 @@ function editObjectDream(){
   
   if (indexToRemove !== -1) {
     existingArray.splice(indexToRemove, 1);
-    existingArray.push(dream);
+    existingArray.push(receipt);
     const updatedArray = JSON.stringify(existingArray);
     window.localStorage.setItem("dataJSON", updatedArray);
   }
@@ -63,15 +103,42 @@ function editObjectDream(){
 
 }
 
+const addProduct = () => {
+  // When the button is clicked, add a new product to the state
+  setProducts([...products, { name: '', cost: 0, taxable: true }]);
+};
+
+
+useEffect(() => {
+  function totalCostProducts() {
+    let cost = 0
+    setGrandTotal(0)
+    let totalArray = products
+      .filter((x) => x.taxable === true)
+      .map((x) => {cost+=(x.cost+(x.cost*(receipt.tax_Amount*.01)))});
+
+    let noTaxArray = products
+      .filter((x) => x.taxable === false)
+      .map((x) => cost+=x.cost);
+
+
+    setGrandTotal(cost.toFixed(2))
+setreceipt({...receipt,"total":grandTotal})
+    // Grand Total with Taxes
+  }
+  totalCostProducts();
+}, [products, receipt.tax_Amount]);
+
+
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
 
-    editObjectDream();
+    editObjectreceipt();
 
 
-navigate(`/dreams/${id}`)
+navigate(`/receipts/${id}`)
     
   };
 
@@ -80,89 +147,94 @@ navigate(`/dreams/${id}`)
 
 
     <div className="spacerDIV"><strong>✏️ EDIT Receipt Archive 📝</strong></div>
-
-<div>Under Construction</div>
-
-    {/* <div className="edit">
-      <form onSubmit={handleSubmit}>
-        <input
-          type="hidden"
-          id="user_id"
-          name="user_id"
-          value={dream.user_id}
-        ></input>
-
-        <label htmlFor="name">Name:</label>
-        <input
-          id="name"
-          value={dream.name}
-          type="text"
-          onChange={handleTextChange}
-          required
-        />
-        <label htmlFor="date">Date:</label>
-        <input
-          id="date"
-          type="date"
-          value={moment(dream.date).format("YYYY-MM-DD")}
-          onChange={handleTextChange}
-        />
-        <label htmlFor="category">Topic:</label>
-        <input
-          id="topic"
-          type="text"
-          name="topic"
-          value={dream.topic}
-          onChange={handleTextChange}
-        />
-        <label htmlFor="good_dream">Type of Dream:</label>
-
-        <select
-          onChange={handleTextChange}
-          name="good_dream"
-          id="good_dream"
-          value={dream.good_dream}
-        >
-          <option value="">--Please choose an option--</option>
-          <option value="good">good</option>
-          <option value="neutral">neutral</option>
-          <option value="bad">bad</option>
-        </select>
-
-        <label htmlFor="dream_description">Description of Dream:</label>
+<form onSubmit={handleSubmit}>
 
 
-        <textarea
-  id="dream_description"
-  name="dream_description"
-  value={dream.dream_description}
-  placeholder="What is your Dream about..."
-  onChange={handleTextChange}
-  rows="5" 
-  cols="50" 
-  required
-/>
+<input
+            id="name"
+            value={receipt.name}
+            type="text"
+            onChange={(e) => handleTextChange(e, 'name')}
+            placeholder="Name of Receipt or Customer..."
+            required
+          />
 
-        <label htmlFor="night">Night Time Dream:</label>
+          <input
+            id="date"
+            type="date"
+            value={moment(receipt.date).format("YYYY-MM-DD")}
+            onChange={(e) => handleTextChange(e, 'date')}
+          />
 
-        <select
-          onChange={handleTextChange}
-          name="night"
-          id="night"
-          value={dream.night}
-        >
-          <option defaultValue={true}>true</option>
-          <option defaultValue={false}>false</option>
-        </select>
+
+          <textarea
+            id="receipt_description"
+            name="receipt_description"
+            value={receipt.receipt_description}
+            placeholder="Write Any Notes Here to Appear on Receipt..."
+            onChange={(e) => handleTextChange(e, 'receipt_description')}
+            rows="5"
+            cols="50"
+            required
+          />
+  <label>Add Tax Amount as Percent</label>
+          <br></br>
+          <input style={{width:"150px", height:"25px", borderRadius:"10px",paddingLeft:"50px"}}
+            id="tax_Amount"
+            type="number"
+            name="tax_Amount"
+            value={receipt.tax_Amount}
+            onChange={(e) => handleTextChange(e, 'tax_Amount')}
+            required
+          />%
+
+          <div style={{ color: "yellow", backgroundColor: "purple",width:"150px",height:"25px" }} onClick={addProduct}>Add Product</div>
+          <ul>
+            {receipt.product_list.map((prod, index) => (
+              <li key={index}>
+                <input
+                  type="text"
+                  placeholder="Product Name"
+                  value={prod.name}
+                  onChange={(e) => handleTextChange(e, 'productName', index)}
+                />
+                <label >
+                  Product Price
+                  <input
+                    type="number"
+                    placeholder="Product Cost"
+                    value={prod.cost}
+                    onChange={(e) => handleTextChange(e, 'productCost', index)}
+                  /></label>
+                <br></br>
+                <label>
+                  Taxable?:
+                  <select
+                    value={prod.taxable}
+                    onChange={(e) => handleTextChange(e, 'taxable', index)}
+                  >
+                    <option value={true}>Yes</option>
+                    <option value={false}>No</option>
+                  </select>
+                </label>
+              </li>
+            ))}
+          </ul>
+
+
+
+
+          <p>GRAND TOTAL: <strong>${grandTotal}</strong></p>
+
+
 
         <input type="submit" />
       </form>
       <Link to={`/receipts/${id}`}>
         <button className="backButton">Nevermind!</button>
       </Link>
-    </div> */}
-    
     </div>
+    
   );
 }
 

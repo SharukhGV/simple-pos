@@ -103,6 +103,9 @@ console.log(receipt)
 <h3>Receipt ID</h3>
 <p>{receipt.id}</p>
 
+<h3>Receipt Title</h3>
+<p>{receipt.name}</p>
+
 <h3>Receipt Description</h3>
 <p>{receipt.receipt_description}</p>
 
