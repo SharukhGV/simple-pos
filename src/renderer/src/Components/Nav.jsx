@@ -1,9 +1,10 @@
 import { NavLink } from "react-router-dom";
-
+import moneyBag from "./moneyBag.png"
 import brainHeart from "./brainHeart.png";
 import { Link } from "react-router-dom";
-function Nav() {
+function Nav({toggleTheme, theme, setTheme}) {
 
+  
   let activeStyle = {
     textDecoration:"none",
     color: "beige",
@@ -14,7 +15,6 @@ function Nav() {
 
     color: "limegreen",
   };
-
 
   return (
     <span> 
@@ -55,7 +55,17 @@ function Nav() {
             New Form
           </NavLink>
         </li>
-
+        <li>
+          {" "}
+          <NavLink
+            className="links"
+            to="/storeinfo"
+            exact="true"
+            style={({ isActive }) => (isActive.isActive ? activeStyle : nonactiveStyle)}
+          >
+            Store Info Form
+          </NavLink>
+        </li>
       </ul>
     </nav></span>
   );

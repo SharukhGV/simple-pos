@@ -31,10 +31,10 @@ if(!!fileData){
         <h1>Simple POS</h1>
         <p>Simplicity. Privacy. Truth</p>
     
-        <p style={pixstyle2}>
+        <p style={pixstyle2}>    
 
-          A Privacy Focused Receipt Maker and Tracker
-        </p>
+
+  </p>
       </div>
      
      

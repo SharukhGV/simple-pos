@@ -7,18 +7,38 @@
     font-size: 20px;
     text-align: center;
     font-family:Arial, Helvetica, sans-serif;
-  background-color: #f2f2f200;
-  color:white
+
   }
 
-  .hiddenMiddleRoute{
+  
+  .light{
+    background-color: rgb(255, 255, 255);
+    display:fixed;
+    margin: auto;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+  }
+  
+
+  
+  
+  .dark{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);  
+  color: white;
+  }
+  
+
+
+  /* .hiddenMiddleRoute{
     display:none;
-  }
-  audio::-webkit-media-controls-panel{
+  } */
+  /* audio::-webkit-media-controls-panel{
     background-color: #30e73900;
-  }
+  } */
 
-  .cardContact{
+  .dark .cardContact{
     text-align: center;
     font-size: medium;
     border: solid;
@@ -28,6 +48,20 @@
     font-family:Arial, Helvetica, sans-serif;
     background-color: #69278a2d;
     color:beige;
+    
+
+  }
+
+  .light .cardContact{
+    text-align: center;
+    font-size: medium;
+    border: solid;
+    border-radius: 10px;
+    padding: 10px;
+    margin: auto;
+    font-family:Arial, Helvetica, sans-serif;
+    background-color: #ffffff;
+    color:rgb(0, 0, 0);
     
 
   }
@@ -42,7 +76,9 @@
 /* .navBar{
   background-color: #4caf4f03;
 } */
-nav{background-color: #504ab680;  }
+.dark nav{background-color: #504ab680;  }
+.light nav{background-color: #ffffff;  }
+
 
 
   .new {
@@ -74,7 +110,7 @@ nav{background-color: #504ab680;  }
 
 
 
-  .thedreamtable{
+  .dark .thedreamtable{
     font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
@@ -82,28 +118,56 @@ nav{background-color: #504ab680;  }
   
   }
 
-  a {
+  .light .thedreamtable{
+    font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  color: rgb(0, 0, 0);
+  max-width: 250px;
+
+  }
+
+  .dark a {
     color: rgb(255, 208, 0);
 }
+
+.light a {
+  color: rgb(68, 7, 75);
+}
+
   :visited{color: rgb(255, 67, 99)}
 
-  .thedreamtable td, #customers th {
+  .dark .thedreamtable td, #customers th {
   border: 1px solid #ddd;
   padding: 8px;
 }
 
-.thedreamtable tr:nth-child(even){background-color: #00000000;}
+.light .thedreamtable td, #customers th {
+  border: 1px solid #000000;
+  padding: 8px;
+}
 
-.thedreamtable tr:hover {background-color: #000000b3;}
+.dark .thedreamtable tr:nth-child(even){background-color: #00000000;}
 
-.thedreamtable th {
+.dark .thedreamtable tr:hover {background-color: #000000b3;}
+
+.dark .thedreamtable th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
   background-color: #0704aa;
 }
 
+.light .thedreamtable tr:nth-child(even){background-color: #ffffff;}
 
+.light .thedreamtable tr:hover {background-color: #ffffff;}
+
+.light .thedreamtable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #ffffff;
+}
 
 input[type=text], select, textarea {
   width: 100%;
@@ -145,13 +209,17 @@ input[type=submit]:hover {
   background-color: #45a049;
 }
 
-div {
+.dark div {
   border-radius: 5px;
   background-color: #00000063;
   padding: 20px;
 }
 
-
+.light div {
+  border-radius: 5px;
+  background-color: #ffffff;
+  padding: 20px;
+}
 
 .thedreamtableSHOW {
   font-family: Arial, Helvetica, sans-serif;
@@ -159,30 +227,51 @@ div {
   width: 100%;
 }
 
-.thedreamtableSHOW  td, #customers th {
+.dark .thedreamtableSHOW  td, #customers th {
   border: 1px solid #ddd;
   padding: 8px;
   color:whitesmoke
 }
 
-.thedreamtableSHOW  tr:nth-child(even){background-color: #0814411b}
-.thedreamtableSHOW  tr th {text-align: center;}
+.dark .thedreamtableSHOW  tr:nth-child(even){background-color: #0814411b}
+.dark .thedreamtableSHOW  tr th {text-align: center;}
 
-.thedreamtableSHOW tr:hover {background-color: #7a0a7263;}
+.dark.thedreamtableSHOW tr:hover {background-color: #7a0a7263;}
 
-.thedreamtableSHOW  th {
+.dark.thedreamtableSHOW  th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
   background-color: #895bcf86;
 }
 
-.thedreamtable  th {
+
+.light .thedreamtableSHOW  tr:nth-child(even){background-color: #ffffff}
+.light .thedreamtableSHOW  tr th {text-align: center;}
+
+.light.thedreamtableSHOW tr:hover {background-color: #ffffff;}
+
+.light.thedreamtableSHOW  th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.dark .thedreamtable  th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
   background-color: #895bcf;
 }
+
+.light .thedreamtable  th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #ffffff;
+}
+
 
 .thedreamtable  tr {
   text-align: center;
@@ -230,10 +319,13 @@ button {
 }
 
 
-legend {
+.dark legend {
   color:hsl(0, 0%, 85%);
 }
 
+.light legend {
+  color:hsl(0, 0%, 0%);
+}
 
 @media (min-width: 300px) and (max-width: 768px) {
 
@@ -320,133 +412,20 @@ padding-right: 100px; */
 
 
 
-.audioCard{
+/* .audioCard{
   background-color: #45a04916;
-}
+} */
 
 .edit{
   background-color: #8104aa00;
 }
 
 
-
-/* PURE CSS TWINKLING STARS BACKGROUND */
-
-/* CodePen
-pure CSS twinkling stars background
-Anastasia Goodwin */
-/* The code below is by Anastasia Goodwin (begin) */
-
-@keyframes move-background {
-  from {
-		-webkit-transform: translate3d(0px, 0px, 0px);
-	}
-	to { 
-		-webkit-transform: translate3d(1000px, 0px, 0px);
-	}
-}
-@-webkit-keyframes move-background {
-  from {
-		-webkit-transform: translate3d(0px, 0px, 0px);
-	}
-	to { 
-		-webkit-transform: translate3d(1000px, 0px, 0px);
-	}
-}
-
-@-moz-keyframes move-background {    
-	from {
-		-webkit-transform: translate3d(0px, 0px, 0px);
-	}
-	to { 
-		-webkit-transform: translate3d(1000px, 0px, 0px);
-	}
-}
-
-    @-webkit-keyframes move-background {
-	from {
-		-webkit-transform: translate3d(0px, 0px, 0px);
-	}
-	to { 
-		-webkit-transform: translate3d(1000px, 0px, 0px);
-	}
-}
-
-.background-container{
-	position: fixed;
-	top: 0;
-	left:0;
-	bottom: 0;
-	right: 0;
-  z-index: -1000;
-}
-
-.stars {
- background: black url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png) repeat;
- position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	display: block;
-  	z-index: 0;
-}
-
-.twinkling{
-	width:10000px;
-	height: 100%;
-	background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png") repeat;
-	background-size: 1000px 1000px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 2;
-    
-    -moz-animation:move-background 70s linear infinite;
-  -ms-animation:move-background 70s linear infinite;
-  -o-animation:move-background 70s linear infinite;
-  -webkit-animation:move-background 70s linear infinite;
-  animation:move-background 70s linear infinite;
-	
-}
-
-.clouds{
-	width:10000px;
-	height: 100%;
-	background: transparent url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png") repeat;
-	background-size: 1000px 1000px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 3;
-
-   -moz-animation:move-background 150s linear infinite;
-  -ms-animation:move-background 150s linear infinite;
-  -o-animation:move-background 150s linear infinite;
-  -webkit-animation:move-background 150s linear infinite;
-  animation:move-background 150s linear infinite;
-}
-/* img{
-  height: 70vh;
-  width:70vh;
-  position: absolute;
-  z-index: 3;
-  right: 20px;
-} */
-/* The code below is by Anastasia Goodwin (end) */
-
-/* pure CSS twinkling stars background */
-/* CodePen Home
-pure CSS twinkling stars background
-Anastasia Goodwin */
-
-
+/* 
 .audioCard{
 
   background-color: rgba(0, 0, 0, 0);
-}
+} */
 
 
 .buttonPDF{
@@ -488,12 +467,21 @@ border-radius: 50%;
   }
 
 
-  body{
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);  
-  color: white;
-  }
+
 
   .addProductButton :hover {
     background-color: darkred;
   }
+
+.light nav { 
+	display: none; 
+} 
+.light button{
+  background-color: white;
+  color: white;
+}
+
+.light .printFriendly {
+  max-width:"250px";
+  height:"auto"
+}

@@ -11,10 +11,23 @@ import Receipts from "./Components/Receipts";
 import ReceiptDetails from "./Components/ReceiptDetails";
 import EditForm from "./Components/EditForm";
 import NewForm from "./Components/NewForm";
+import StoreInfo from "./Pages/StoreInfo";
 
 
 function App() {
   const [fileData, setFileData] = useState(null);
+
+  const [theme, setTheme] = useState('dark');
+  const toggleTheme = () => {
+    if (theme === 'light') {
+      setTheme('dark');
+    } else {
+      setTheme('light');
+    }
+  };
+  useEffect(() => {
+    document.body.className = theme;
+  }, [theme]);
 
 
 useEffect(()=>{
@@ -30,13 +43,15 @@ useEffect(()=>{
 
   return (
     <Router>
-    <Nav />
+    <Nav toggleTheme={toggleTheme} theme={theme} setTheme={setTheme} />
     <Routes>
       <Route path="/" element={<Home fileData={fileData} setFileData={setFileData} />} />
       <Route path="/receipts" element={<Receipts fileData={fileData} />} />
-      <Route path="/receipts/:id" element={<ReceiptDetails />} />
+      <Route path="/receipts/:id" element={<ReceiptDetails toggleTheme={toggleTheme} theme={theme} setTheme={setTheme} />} />
       <Route path="/receipts/:id/edit" element={<EditForm />} />
       <Route path="/receipts/new" element={<NewForm />} />
+      <Route path="/storeinfo" element={<StoreInfo />} />
+
       <Route path="*" element={<NotFound />} />
     </Routes>
   </Router>

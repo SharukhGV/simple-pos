@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
 import DownloadReceipt from "./DownloadReceipt";
-function ReceiptDetails({ individualreceipts, index }) {
+function ReceiptDetails({ individualreceipts, index, toggleTheme,theme,setTheme }) {
   const { id } = useParams();
 
   const [receipt9, setreceipt9] = useState([])
@@ -74,25 +74,51 @@ console.log(receipt)
     color: thecolor,
   };
 
+function printPage(){
+  window.print()
+}
+
+	function renderLOGO() {
+		if (theme === "light") {
+      printPage()
+
+			return (<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Friendly Printing</div>)
+		}
+		if (theme === "dark") {
 
 
 
+			return (
+			<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Print Unfriendly</div>
+
+			)
+		}
+	}
 
 
+  function renderBusinessEntitInfo(){
+    let businessNAME = localStorage.getItem("businessName") || null
+    let businessLicense = localStorage.getItem("licenseNumbers") || null
+return(
+  <>
+  <div>{businessNAME}</div>
+  <div>{businessLicense}</div>
+
+  </>
+)
+  }
   console.log(receipt.product_list)
 
-
-
   return (
-    <div>
+    <div className="printFriendly">
 
 
       <div className="spacerDIV"></div>
 
-      <article className="cardContact" key={receipt9.id}>
+      <article className="thedreamtable" key={receipt9.id}>
 
         <legend>
-          <strong style={textcoloring} className="everyoneHASreceipts">Your Specific Receipt...</strong>
+          <strong style={textcoloring} className="everyoneHASreceipts">Your Receipt...</strong>
         </legend>
 {/*   id: uuidv4(),
     totaltotal: products,
@@ -102,10 +128,15 @@ console.log(receipt)
     receipt_description: "" */}
 
 
-<table  className="thedreamtable">
+<table   className="thedreamtable">
   <tr>
     <th>Category</th>
     <th>Value</th>
+  </tr>
+
+  <tr>
+    <td>Store Info</td>
+    <td>{renderBusinessEntitInfo()}</td>
   </tr>
   <tr>
     <td>ID</td>
@@ -131,7 +162,7 @@ console.log(receipt)
     <td>Product List</td>
     <td>{receipt.product_list.map(product=>{
   return(
-<div>{product.name} ---------- ${product.cost} USD</div>
+<div>{product.name} ... ${product.cost} USD</div>
   )
 }
 )}</td>
@@ -157,7 +188,8 @@ console.log(receipt)
           </span>
         </div>
 <DownloadReceipt receipt9={receipt9}/>
-
+{/* <button onClick={()=>{window.print()}}>Print Page</button> */}
+{renderLOGO()}
       </article>
 
     </div>

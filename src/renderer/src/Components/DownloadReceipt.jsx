@@ -37,12 +37,12 @@ function DownloadReceipt({receipt9}) {
         cursorY = 10;
       }
     });
-    doc.save('local_storage_data.pdf');
+    doc.save(`${receipt9.id}.pdf`);
   };
 
   return (
  
-      <button style={{ backgroundColor: "#ccffff", color: "black" }} onClick={handleDownloadPDF}>💻 Download Data as PDF 📝</button>
+      <button  onClick={handleDownloadPDF}> Download Data as PDF </button>
    
   );
 };
