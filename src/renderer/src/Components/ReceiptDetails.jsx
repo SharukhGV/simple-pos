@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import moment from "moment";
 import DownloadReceipt from "./DownloadReceipt";
+import React, { useRef } from 'react';
+import ReactToPrint from 'react-to-print';
+import { forwardRef } from "react";
 function ReceiptDetails({ individualreceipts, index, toggleTheme,theme,setTheme }) {
   const { id } = useParams();
 
@@ -78,22 +81,22 @@ function printPage(){
   window.print()
 }
 
-	function renderLOGO() {
-		if (theme === "light") {
-      printPage()
+	// function renderLOGO() {
+	// 	if (theme === "light") {
+  //     printPage()
 
-			return (<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Friendly Printing</div>)
-		}
-		if (theme === "dark") {
+	// 		return (<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Friendly Printing</div>)
+	// 	}
+	// 	if (theme === "dark") {
 
 
 
-			return (
-			<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Print Unfriendly</div>
+	// 		return (
+	// 		<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Print Unfriendly</div>
 
-			)
-		}
-	}
+	// 		)
+	// 	}
+	// }
 
 
   function renderBusinessEntitInfo(){
@@ -101,34 +104,20 @@ function printPage(){
     let businessLicense = localStorage.getItem("licenseNumbers") || null
 return(
   <>
-  <div>{businessNAME}</div>
-  <div>{businessLicense}</div>
+  <p>{businessNAME}</p>
+  <p>{businessLicense}</p>
 
   </>
 )
   }
   console.log(receipt.product_list)
 
-  return (
-    <div className="printFriendly">
 
 
-      <div className="spacerDIV"></div>
-
-      <article className="thedreamtable" key={receipt9.id}>
-
-        <legend>
-          <strong style={textcoloring} className="everyoneHASreceipts">Your Receipt...</strong>
-        </legend>
-{/*   id: uuidv4(),
-    totaltotal: products,
-    total: grandTotal,
-    date: date7,
-    tax_Amount: 0,
-    receipt_description: "" */}
-
-
-<table   className="thedreamtable">
+  
+  const ComponentToPrint = forwardRef((props, ref) => (
+    <div ref={ref}>
+     <table  style={{background:"white",color:"black", margin:"auto"}}>
   <tr>
     <th>Category</th>
     <th>Value</th>
@@ -166,13 +155,39 @@ return(
     <td>Product List</td>
     <td>{receipt.product_list.map(product=>{
   return(
-<div>{product.name} ... ${product.cost} USD</div>
+<p>{product.name} ... ${product.cost} USD</p>
   )
 }
 )}</td>
   </tr>
 </table>
+    </div>
+  ));
+  
+  function PrintComponent() {
+    const componentRef = useRef();
+  
+    return (
+      <div>
+        <ComponentToPrint ref={componentRef} />
+        <ReactToPrint
+          trigger={() => <button>Print</button>}
+          content={() => componentRef.current}
+        />
+      </div>
+    );
+  }
+  
+  
 
+  return (
+    <div className="printFriendly">
+
+
+      <div className="spacerDIV"></div>
+
+      <article className="thedreamtable" key={receipt9.id}>
+{PrintComponent()}
 
         <div className="showNavigation">
           <span>
@@ -193,7 +208,6 @@ return(
         </div>
 <DownloadReceipt receipt9={receipt9}/>
 {/* <button onClick={()=>{window.print()}}>Print Page</button> */}
-{renderLOGO()}
       </article>
 
     </div>

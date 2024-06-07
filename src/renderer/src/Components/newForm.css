@@ -1,0 +1,33 @@
+.parent {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+    .product { grid-area: 1 / 1 / 2 / 2;
+    margin-left: 10px;
+    margin-right: 10px;
+    
+    }
+
+.product input[type=number]{
+    width: 150px;
+    height:35px
+}
+
+    .calculations { 
+        
+        grid-area: 1 / 2 / 2 / 3;
+        font-size: 20px;
+        padding:"10px";
+        margin-left: 10px;
+        margin-right: 10px;
+        
+    }
+
+    .calculations input { 
+      background-color: green;
+        
+    }

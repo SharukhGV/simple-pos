@@ -23,6 +23,7 @@
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "react-to-print": "^2.15.1",
     "teleprint": "^2.1.0"
   },
   "devDependencies": {

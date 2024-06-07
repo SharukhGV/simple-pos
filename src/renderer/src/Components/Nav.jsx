@@ -23,7 +23,15 @@ function Nav({toggleTheme, theme, setTheme}) {
       <ul className="no-bullets">
        
          
+      <li style={{paddingRight:"90%"}}><Link to="/"><img className="brain"
+      style={{
+        maxWidth: "35px",
+       marginRight: "100%",
     
+      }}
+      src={brainHeart}
+      alt="home logo button"
+    /></Link></li>
 
         <li>
           <NavLink
@@ -35,15 +43,7 @@ function Nav({toggleTheme, theme, setTheme}) {
             All Receipts
           </NavLink>
         </li>
- <li><Link to="/"><img className="brain"
-      style={{
-        maxWidth: "25px",
-       marginRight: "100%",
-    
-      }}
-      src={brainHeart}
-      alt="home logo button"
-    /></Link></li>
+ 
         <li>
           {" "}
           <NavLink
@@ -55,6 +55,7 @@ function Nav({toggleTheme, theme, setTheme}) {
             New Form
           </NavLink>
         </li>
+        
         <li>
           {" "}
           <NavLink

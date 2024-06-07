@@ -2,6 +2,7 @@ import { useNavigate, Link } from "react-router-dom";//
 import { useState, useEffect } from "react";
 import moment from "moment";
 import { v4 as uuidv4 } from 'uuid';
+import "./newForm.css"
 
 function NewForm() {
   const date7 = new Date();
@@ -118,8 +119,8 @@ function NewForm() {
   }
   return (
 
-    <div className="cardContact">
-
+    <div className="parent">
+<div className="product">
       <h1 className="spacerDIV"><strong>New Receipt</strong></h1>
       <div className="edit">
         <form onSubmit={handleSubmit}>
@@ -163,7 +164,7 @@ function NewForm() {
             required
           />%
 
-          <div className="addProductButton" style={{ color: "yellow", backgroundColor: "purple", width: "150px", height: "25px" }} onClick={addProduct}>Add Product</div>
+          <div className="addProductButton" style={{ color: "yellow",borderRadius:"10px", paddingTop:"3px", backgroundColor: "purple", width: "150px", height: "35px" }} onClick={addProduct}>Add Product</div>
           <ul>
             {products.map((product, index) => (
               <li key={index}>
@@ -195,26 +196,30 @@ function NewForm() {
               </li>
             ))}
           </ul>
-
-
-
-
-          <p>GRAND TOTAL: <strong>${grandTotal}</strong></p>
-          <br></br>
-          <div style={{maxWidth:"500px", border:"dotted", margin:"auto"}}>
-<div>Input How much Change You were Given if Payment is Cash</div>
-          <input type="text" onChange={handleChangeAmount} value={change}></input>
-
-          <div>Change to Give Back: ${changetoGiveBack()}</div>
-</div>
-          <input type="submit" />
+  <input type="submit" />
         </form>
 
         <Link to={`/receipts `}>
           <button className="backButton">Go Back to All Receipts!</button>
         </Link>
+</div>
+</div>
+<div style={{border:"solid white"}} className="calculations">
+          <h3>GRAND TOTAL</h3> 
+          <h3><strong>${grandTotal}</strong></h3>
+          <br></br>
+          <div style={{maxWidth:"500px", margin:"auto"}}>
+            <br></br>
+            <br></br>
+<div>Input How much Change You were Given if Payment is Cash</div>
+          <input type="text" onChange={handleChangeAmount} value={change}></input>
+<br></br>
+          <h3>Change to Give Back:</h3>
+          <h3 style={{color:"orange"}}> ${changetoGiveBack()}</h3>
+</div>
+        </div>
 
-      </div></div>
+      </div>
   );
 }
 
