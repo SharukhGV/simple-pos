@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 
 function Receipt({  receipt }) {
 
-  const [name1, setname1] = useState([]);   
-  const [topic1, settopic1] = useState([]);   
-  const [identification, setidentification] = useState([]);   
+  const [theId, settheId] = useState([]);   
+  const [date1, setdate1] = useState([]);   
+  const [total1, settotal1] = useState([]);   
 
 useEffect(()=>{
 
   window.localStorage.getItem("dataJSON");
-  setname1(receipt.id)
-  settopic1(receipt.date)
-  setidentification(receipt.total)
+  settheId(receipt.id)
+  setdate1(receipt.date)
+  settotal1(receipt.total)
 },[,receipt.id,receipt.date,receipt.total])
 
 
@@ -21,10 +21,10 @@ useEffect(()=>{
     <>
 <tbody>
     <tr>
-        <td>{topic1}</td>
-    <td><Link to={`/receipts/${name1}`}>{name1}</Link>
+        <td>{date1}</td>
+    <td><Link to={`/receipts/${theId}`}>{theId}</Link>
 </td>
-    <td>{identification}</td>
+    <td>{total1}</td>
     </tr>
     </tbody>
 

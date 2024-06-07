@@ -100,28 +100,44 @@ console.log(receipt)
     date: date7,
     tax_Amount: 0,
     receipt_description: "" */}
-<h3>Receipt ID</h3>
-<p>{receipt.id}</p>
 
-<h3>Receipt Title</h3>
-<p>{receipt.name}</p>
 
-<h3>Receipt Description</h3>
-<p>{receipt.receipt_description}</p>
-
-<h3>Receipt Total</h3>
-<p>{receipt.total}</p>
-
-<h3>Receipt Tax Amount</h3>
-<p>{receipt.tax_Amount}%</p>
-
-<h3>Product List</h3>
-{receipt.product_list.map(product=>{
+<table  className="thedreamtable">
+  <tr>
+    <th>Category</th>
+    <th>Value</th>
+  </tr>
+  <tr>
+    <td>ID</td>
+    <td>{receipt.id}</td>
+  </tr>
+  <tr>
+    <td>Headline</td>
+    <td>{receipt.name}</td>
+  </tr>
+  <tr>
+    <td>Description</td>
+    <td>{receipt.receipt_description}</td>
+  </tr>
+  <tr>
+    <td>Grand Total</td>
+    <td>{receipt.total}</td>
+  </tr>
+  <tr>
+    <td>Tax Amount</td>
+    <td>{receipt.tax_Amount}</td>
+  </tr>
+  <tr>
+    <td>Product List</td>
+    <td>{receipt.product_list.map(product=>{
   return(
 <div>{product.name} ---------- ${product.cost} USD</div>
   )
 }
-)}
+)}</td>
+  </tr>
+</table>
+
 
         <div className="showNavigation">
           <span>

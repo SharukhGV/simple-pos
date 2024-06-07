@@ -10,10 +10,10 @@ function NewForm() {
 
   const [taxable, settaxable] = useState(0)
   const [nonTaxable, setnontaxable] = useState(0)
-  
+
   const [receipt, setreceipt] = useState({
     id: uuidv4(),
-    name:"",
+    name: "",
     product_list: [products],
     total: grandTotal,
     date: date7,
@@ -37,27 +37,27 @@ function NewForm() {
     } else if (fieldName === 'date') {
       setreceipt({ ...receipt, [fieldName]: new Date(value) });
     } else if (fieldName === 'tax_Amount') {
-      setreceipt({ ...receipt, [fieldName]:value });
+      setreceipt({ ...receipt, [fieldName]: value });
     } else if (fieldName === 'receipt_description') {
       setreceipt({ ...receipt, [fieldName]: value });
-    } 
+    }
     else if (fieldName === 'productName') {
       const updatedProducts = [...products];
       updatedProducts[index].name = value;
-      setProducts(updatedProducts);      
-      setreceipt({...receipt, 'product_list':[...products]})
+      setProducts(updatedProducts);
+      setreceipt({ ...receipt, 'product_list': [...products] })
 
     } else if (fieldName === 'productCost') {
       const updatedProducts = [...products];
       updatedProducts[index].cost = parseFloat(value);
       setProducts(updatedProducts);
-      setreceipt({...receipt, 'product_list':[...products]})
+      setreceipt({ ...receipt, 'product_list': [...products] })
 
     } else if (fieldName === 'taxable') {
       const updatedProducts = [...products];
       updatedProducts[index].taxable = value === 'true';
       setProducts(updatedProducts);
-      setreceipt({...receipt, 'product_list':[...products]})
+      setreceipt({ ...receipt, 'product_list': [...products] })
 
     }
   };
@@ -76,19 +76,19 @@ function NewForm() {
       setGrandTotal(0)
       let totalArray = products
         .filter((x) => x.taxable === true)
-        .map((x) => {cost+=(x.cost+(x.cost*(receipt.tax_Amount*.01)))});
+        .map((x) => { cost += (x.cost + (x.cost * (receipt.tax_Amount * .01))) });
 
       let noTaxArray = products
         .filter((x) => x.taxable === false)
-        .map((x) => cost+=x.cost);
+        .map((x) => cost += x.cost);
 
 
       setGrandTotal(cost.toFixed(2))
-setreceipt({...receipt,"total":grandTotal})
+      setreceipt({ ...receipt, "total": grandTotal })
       // Grand Total with Taxes
     }
     totalCostProducts();
-  }, [products, receipt.tax_Amount]);
+  }, [products, grandTotal, receipt.tax_Amount]);
 
 
   function handleSubmit(event) {
@@ -107,21 +107,30 @@ setreceipt({...receipt,"total":grandTotal})
 
   console.log(products)
 
+  const [change, setChange] = useState(0)
+  function handleChangeAmount(event) {
+    setChange(event.target.value)
+
+  }
+  function changetoGiveBack(){
+    let amount =  change-grandTotal
+    return amount.toFixed(2)
+  }
   return (
 
     <div className="cardContact">
-      
+
       <h1 className="spacerDIV"><strong>New Receipt</strong></h1>
       <div className="edit">
         <form onSubmit={handleSubmit}>
-        
+
 
           <input
             id="name"
             value={receipt.name}
             type="text"
             onChange={(e) => handleTextChange(e, 'name')}
-            placeholder="Name of Receipt or Customer..."
+            placeholder="Name of Receipt, Cashier, or Customer..."
             required
           />
 
@@ -143,9 +152,9 @@ setreceipt({...receipt,"total":grandTotal})
             cols="50"
             required
           />
-  <label>Add Tax Amount as Percent</label>
+          <label>Add Tax Amount as Percent</label>
           <br></br>
-          <input style={{width:"150px", height:"25px", borderRadius:"10px",paddingLeft:"50px"}}
+          <input style={{ width: "150px", height: "25px", borderRadius: "10px", paddingLeft: "50px" }}
             id="tax_Amount"
             type="number"
             name="tax_Amount"
@@ -154,7 +163,7 @@ setreceipt({...receipt,"total":grandTotal})
             required
           />%
 
-          <div style={{ color: "yellow", backgroundColor: "purple",width:"150px",height:"25px" }} onClick={addProduct}>Add Product</div>
+          <div className="addProductButton" style={{ color: "yellow", backgroundColor: "purple", width: "150px", height: "25px" }} onClick={addProduct}>Add Product</div>
           <ul>
             {products.map((product, index) => (
               <li key={index}>
@@ -191,9 +200,13 @@ setreceipt({...receipt,"total":grandTotal})
 
 
           <p>GRAND TOTAL: <strong>${grandTotal}</strong></p>
+          <br></br>
+          <div style={{maxWidth:"500px", border:"dotted", margin:"auto"}}>
+<div>Input How much Change You were Given if Payment is Cash</div>
+          <input type="text" onChange={handleChangeAmount} value={change}></input>
 
-
-
+          <div>Change to Give Back: ${changetoGiveBack()}</div>
+</div>
           <input type="submit" />
         </form>
 
