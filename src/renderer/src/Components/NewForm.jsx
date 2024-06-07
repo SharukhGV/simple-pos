@@ -10,7 +10,7 @@ function NewForm() {
   const [grandTotal, setGrandTotal] = useState(0)
 
   const [taxable, settaxable] = useState(0)
-  const [nonTaxable, setnontaxable] = useState(0)
+  const [totalTax, setTotalTax] = useState(0)
 
   const [receipt, setreceipt] = useState({
     id: uuidv4(),
@@ -19,7 +19,8 @@ function NewForm() {
     total: grandTotal,
     date: date7,
     tax_Amount: 0,
-    receipt_description: ""
+    receipt_description: "",
+    total_tax: totalTax
   });
 
   useEffect(() => {
@@ -46,52 +47,82 @@ function NewForm() {
       const updatedProducts = [...products];
       updatedProducts[index].name = value;
       setProducts(updatedProducts);
-      setreceipt({ ...receipt, 'product_list': [...products] })
+      setreceipt({ ...receipt, product_list: updatedProducts });
 
     } else if (fieldName === 'productCost') {
       const updatedProducts = [...products];
       updatedProducts[index].cost = parseFloat(value);
       setProducts(updatedProducts);
-      setreceipt({ ...receipt, 'product_list': [...products] })
+      setreceipt({ ...receipt, product_list: updatedProducts });
 
-    } else if (fieldName === 'taxable') {
+    } 
+    else if (fieldName === 'taxable') {
       const updatedProducts = [...products];
-      updatedProducts[index].taxable = value === 'true';
+      updatedProducts[index].taxable = value;
       setProducts(updatedProducts);
-      setreceipt({ ...receipt, 'product_list': [...products] })
-
+      setreceipt({ ...receipt, product_list: updatedProducts });
     }
+    
   };
 
 
 
   const addProduct = () => {
     // When the button is clicked, add a new product to the state
-    setProducts([...products, { name: '', cost: 0, taxable: true }]);
+    setProducts([...products, { name: '', cost: 0, taxable: "" }]);
   };
 
 
   useEffect(() => {
     function totalCostProducts() {
       let cost = 0
+      let totTAX = 0
       setGrandTotal(0)
       let totalArray = products
-        .filter((x) => x.taxable === true)
-        .map((x) => { cost += (x.cost + (x.cost * (receipt.tax_Amount * .01))) });
+        .filter((y) => y.taxable === "true")
+        .map((x) => {
+          cost += (x.cost + (x.cost * (receipt.tax_Amount * .01)))
+        });
 
       let noTaxArray = products
-        .filter((x) => x.taxable === false)
+        .filter((y) => y.taxable === "false")
+        .map((x) => cost += x.cost);
+
+      let includeTaxArray = products
+        .filter((y) => y.taxable === "include")
         .map((x) => cost += x.cost);
 
 
+      let includeTaxAmount = products
+        .filter((x) => x.taxable === "include")
+        .map((z) => totTAX += (z.cost - (z.cost / (1 + (receipt.tax_Amount / 100)))));
+      let trueTaxArray = products
+        .filter((x) => x.taxable === "true")
+        .map((z) => {
+          totTAX += (z.cost * (receipt.tax_Amount * .01))
+        });
+
       setGrandTotal(cost.toFixed(2))
-      setreceipt({ ...receipt, "total": grandTotal })
-      // Grand Total with Taxes
+      setTotalTax(totTAX.toFixed(2))
+      setreceipt({ ...receipt, "total": grandTotal, total_tax: totalTax})
+
     }
     totalCostProducts();
-  }, [products, grandTotal, receipt.tax_Amount]);
+  }, [products, grandTotal,setProducts, totalTax, receipt.tax_Amount]);
 
+ console.log(receipt)
 
+  console.log(products)
+
+  const [change, setChange] = useState(0)
+  function handleChangeAmount(event) {
+    setChange(event.target.value)
+
+  }
+  function changetoGiveBack() {
+    let amount = change - grandTotal
+    return amount.toFixed(2)
+  }
   function handleSubmit(event) {
     event.preventDefault();
 
@@ -104,122 +135,116 @@ function NewForm() {
     navigate("/receipts")
 
   }
-  console.log(receipt)
-
-  console.log(products)
-
-  const [change, setChange] = useState(0)
-  function handleChangeAmount(event) {
-    setChange(event.target.value)
-
-  }
-  function changetoGiveBack(){
-    let amount =  change-grandTotal
-    return amount.toFixed(2)
-  }
+ 
   return (
 
     <div className="parent">
-<div className="product">
-      <h1 className="spacerDIV"><strong>New Receipt</strong></h1>
-      <div className="edit">
-        <form onSubmit={handleSubmit}>
+      <div className="product">
+        <h1 className="spacerDIV"><strong>New Receipt</strong></h1>
+        <div className="edit">
+          <form onSubmit={handleSubmit}>
 
 
-          <input
-            id="name"
-            value={receipt.name}
-            type="text"
-            onChange={(e) => handleTextChange(e, 'name')}
-            placeholder="Name of Receipt, Cashier, or Customer..."
-            required
-          />
+            <input
+              id="name"
+              value={receipt.name}
+              type="text"
+              onChange={(e) => handleTextChange(e, 'name')}
+              placeholder="Name of Receipt, Cashier, or Customer..."
+              required
+            />
 
-          <input
-            id="date"
-            type="date"
-            value={moment(receipt.date).format("YYYY-MM-DD")}
-            onChange={(e) => handleTextChange(e, 'date')}
-          />
+            <input
+              id="date"
+              type="date"
+              value={moment(receipt.date).format("YYYY-MM-DD")}
+              onChange={(e) => handleTextChange(e, 'date')}
+            />
 
 
-          <textarea
-            id="receipt_description"
-            name="receipt_description"
-            value={receipt.receipt_description}
-            placeholder="Write Any Notes Here to Appear on Receipt..."
-            onChange={(e) => handleTextChange(e, 'receipt_description')}
-            rows="5"
-            cols="50"
-            required
-          />
-          <label>Add Tax Amount as Percent</label>
-          <br></br>
-          <input style={{ width: "150px", height: "25px", borderRadius: "10px", paddingLeft: "50px" }}
-            id="tax_Amount"
-            type="number"
-            name="tax_Amount"
-            value={receipt.tax_Amount}
-            onChange={(e) => handleTextChange(e, 'tax_Amount')}
-            required
-          />%
+            <textarea
+              id="receipt_description"
+              name="receipt_description"
+              value={receipt.receipt_description}
+              placeholder="Write Any Notes Here to Appear on Receipt..."
+              onChange={(e) => handleTextChange(e, 'receipt_description')}
+              rows="5"
+              cols="50"
+              required
+            />
+            <label>Add Tax Amount as Percent</label>
+            <br></br>
+            <input style={{ width: "150px", height: "25px", borderRadius: "10px", paddingLeft: "50px" }}
+              id="tax_Amount"
+              type="number"
+              name="tax_Amount"
+              value={receipt.tax_Amount}
+              onChange={(e) => handleTextChange(e, 'tax_Amount')}
+              required
+            />%
 
-          <div className="addProductButton" style={{ color: "yellow",borderRadius:"10px", paddingTop:"3px", backgroundColor: "purple", width: "150px", height: "35px" }} onClick={addProduct}>Add Product</div>
-          <ul>
-            {products.map((product, index) => (
-              <li key={index}>
-                <input
-                  type="text"
-                  placeholder="Product Name"
-                  value={product.name}
-                  onChange={(e) => handleTextChange(e, 'productName', index)}
-                />
-                <label >
-                  Product Price
+            <div className="addProductButton" style={{ color: "yellow", borderRadius: "10px", paddingTop: "3px", backgroundColor: "purple", width: "150px", height: "35px" }} onClick={addProduct}>Add Product</div>
+            <ul>
+              {products.map((product, index) => (
+                <li key={index}>
                   <input
-                    type="number"
-                    placeholder="Product Cost"
-                    value={product.cost}
-                    onChange={(e) => handleTextChange(e, 'productCost', index)}
-                  /></label>
-                <br></br>
-                <label>
-                  Taxable?:
-                  <select
-                    value={product.taxable}
-                    onChange={(e) => handleTextChange(e, 'taxable', index)}
-                  >
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
-                  </select>
-                </label>
-              </li>
-            ))}
-          </ul>
-  <input type="submit" />
-        </form>
+                    type="text"
+                    placeholder="Product Name"
+                    value={product.name}
+                    onChange={(e) => handleTextChange(e, 'productName', index)}
+                  />
+                  <label >
+                    Product Price
+                    <input
+                      type="number"
+                      placeholder="Product Cost"
+                      value={product.cost}
+                      onChange={(e) => handleTextChange(e, 'productCost', index)}
+                    /></label>
+                  <br></br>
+                  <label>
+                    Taxable?:
+                    <select
+                      value={product.taxable}
+                      onChange={(e) => handleTextChange(e, 'taxable', index)}
+                    >
+                                            
+                     <option value="">select from options</option>
+                      <option value="include">Include</option>
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
 
-        <Link to={`/receipts `}>
-          <button className="backButton">Go Back to All Receipts!</button>
-        </Link>
-</div>
-</div>
-<div style={{border:"solid white", backgroundColor:"darkblue"}} className="calculations">
-          <h3>GRAND TOTAL</h3> 
-          <h3><strong>${grandTotal}</strong></h3>
-          <br></br>
-          <div style={{maxWidth:"500px", margin:"auto"}}>
-            <br></br>
-            <br></br>
-<div>Input How much Change You were Given if Payment is Cash</div>
-          <input type="text" onChange={handleChangeAmount} value={change}></input>
-<br></br>
-          <h3>Change to Give Back:</h3>
-          <h3 style={{color:"yellowgreen"}}> ${changetoGiveBack()}</h3>
-</div>
+                    </select>
+                  </label>
+                </li>
+              ))}
+            </ul>
+            <input type="submit" />
+          </form>
+
+          <Link to={`/receipts `}>
+            <button className="backButton">Go Back to All Receipts!</button>
+          </Link>
         </div>
-
       </div>
+      <div style={{ border: "solid white", backgroundColor: "darkblue" }} className="calculations">
+        <h3>GRAND TOTAL</h3>
+        <h3><strong>${grandTotal}</strong></h3>
+        <div>Tax Collected</div>
+        <div>{totalTax}</div>
+        <br></br>
+        <div style={{ maxWidth: "500px", margin: "auto" }}>
+          <br></br>
+          <br></br>
+          <div>Input How much Change You were Given if Payment is Cash</div>
+          <input type="text" onChange={handleChangeAmount} value={change}></input>
+          <br></br>
+          <h3>Change to Give Back:</h3>
+          <h3 style={{ color: "yellowgreen" }}> ${changetoGiveBack()}</h3>
+        </div>
+      </div>
+
+    </div>
   );
 }
 

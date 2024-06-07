@@ -136,6 +136,10 @@ return(
     <td>{receipt.date}</td>
   </tr>
   <tr>
+    <td>Total Tax Collected</td>
+    <td>{receipt.total_tax}</td>
+  </tr>
+  <tr>
     <td>Headline</td>
     <td>{receipt.name}</td>
   </tr>

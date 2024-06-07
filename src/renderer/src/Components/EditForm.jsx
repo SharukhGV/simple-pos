@@ -8,6 +8,7 @@ function EditForm() {
   let { id } = useParams();
   const [products, setProducts] = useState([]);
   const [grandTotal, setGrandTotal] = useState(0)
+  const [totalTax, setTotalTax] = useState(0)
 
   function getObjectSpecific(objects, id) {
     let targetObject = null;
@@ -36,7 +37,8 @@ function EditForm() {
     total: receipts.total,
     date: receipts.date,
     tax_Amount: receipts.tax_Amount,
-    receipt_description: receipts.receipt_description
+    receipt_description: receipts.receipt_description,
+    total_tax:receipts.tax_total
   });
 
   useEffect(()=>{
@@ -69,7 +71,7 @@ setProducts([...receipts.product_list])
 
     } else if (fieldName === 'taxable') {
       const updatedProducts = [...products];
-      updatedProducts[index].taxable = value === 'true';
+      updatedProducts[index].taxable = value;
       setProducts(updatedProducts);
       setreceipt({...receipt, 'product_list':[...products]})
 
@@ -112,22 +114,39 @@ const addProduct = () => {
 useEffect(() => {
   function totalCostProducts() {
     let cost = 0
+    let totTAX = 0
     setGrandTotal(0)
     let totalArray = products
-      .filter((x) => x.taxable === true)
-      .map((x) => {cost+=(x.cost+(x.cost*(receipt.tax_Amount*.01)))});
+      .filter((y) => y.taxable === "true")
+      .map((x) => {
+        cost += (x.cost + (x.cost * (receipt.tax_Amount * .01)))
+      });
 
     let noTaxArray = products
-      .filter((x) => x.taxable === false)
-      .map((x) => cost+=x.cost);
+      .filter((y) => y.taxable === "false")
+      .map((x) => cost += x.cost);
 
+    let includeTaxArray = products
+      .filter((y) => y.taxable === "include")
+      .map((x) => cost += x.cost);
+
+
+    let includeTaxAmount = products
+      .filter((x) => x.taxable === "include")
+      .map((z) => totTAX += (z.cost - (z.cost / (1 + (receipt.tax_Amount / 100)))));
+    let trueTaxArray = products
+      .filter((x) => x.taxable === "true")
+      .map((z) => {
+        totTAX += (z.cost * (receipt.tax_Amount * .01))
+      });
 
     setGrandTotal(cost.toFixed(2))
-setreceipt({...receipt,"total":grandTotal})
-    // Grand Total with Taxes
+    setTotalTax(totTAX.toFixed(2))
+    setreceipt({ ...receipt, "total": grandTotal, total_tax: totalTax})
+
   }
   totalCostProducts();
-}, [products, grandTotal, receipt.tax_Amount]);
+}, [products, grandTotal,totalTax, receipt.tax_Amount]);
 
 
 
@@ -141,7 +160,7 @@ setreceipt({...receipt,"total":grandTotal})
 navigate(`/receipts/${id}`)
     
   };
-
+console.log(totalTax)
   return (
     <div className="cardContact">
 
@@ -212,9 +231,12 @@ navigate(`/receipts/${id}`)
                   <select
                     value={prod.taxable}
                     onChange={(e) => handleTextChange(e, 'taxable', index)}
-                  >
-                    <option value={true}>Yes</option>
-                    <option value={false}>No</option>
+                  >   
+                   <option value="">select from options</option>
+                   <option value="include">Include</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+
                   </select>
                 </label>
               </li>
