@@ -155,7 +155,7 @@ function ReceiptDetails({ individualreceipts, index, toggleTheme, theme, setThem
         </tr>
         <tr>
           <td>Tax Amount</td>
-          <td>{receipt.tax_Amount}</td>
+          <td>{receipt.tax_Amount}%</td>
         </tr>
         <tr>
           <td>Total Tax Collected</td>

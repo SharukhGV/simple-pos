@@ -33,7 +33,10 @@ localStorage.removeItem("licenseNumbers")
     return (
         <>
         <form onSubmit={onsubmitBusinessEntity}>
+            <h3>Information Submitted Will appear on Receipt. To Overwrite, just resubmit</h3>
             <input type="text" onChange={handletextchange} value={storeName} placeholder="Enter Business Name"></input>
+            <h3>If more than one License #, separate with commas ","</h3>
+
             <input type="text" onChange={handletextchangeLicense} value={licenseName} placeholder="Enter License Number(s)"></input>
        <input type="submit"></input>
        

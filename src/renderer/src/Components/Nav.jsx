@@ -1,5 +1,4 @@
 import { NavLink } from "react-router-dom";
-import moneyBag from "./moneyBag.png"
 import brainHeart from "./brainHeart.png";
 import { Link } from "react-router-dom";
 function Nav({toggleTheme, theme, setTheme}) {
@@ -23,11 +22,9 @@ function Nav({toggleTheme, theme, setTheme}) {
       <ul className="no-bullets">
        
          
-      <li style={{paddingRight:"90%"}}><Link to="/"><img className="brain"
+      <li style={{top:"5px", left:"5px"}}><Link to="/"><img className="brain"
       style={{
-        maxWidth: "35px",
-       marginRight: "100%",
-    
+        maxWidth: "35px"
       }}
       src={brainHeart}
       alt="home logo button"
@@ -64,7 +61,7 @@ function Nav({toggleTheme, theme, setTheme}) {
             exact="true"
             style={({ isActive }) => (isActive.isActive ? activeStyle : nonactiveStyle)}
           >
-            Store Info Form
+            Store Info
           </NavLink>
         </li>
       </ul>

@@ -55,14 +55,14 @@ function NewForm() {
       setProducts(updatedProducts);
       setreceipt({ ...receipt, product_list: updatedProducts });
 
-    } 
+    }
     else if (fieldName === 'taxable') {
       const updatedProducts = [...products];
       updatedProducts[index].taxable = value;
       setProducts(updatedProducts);
       setreceipt({ ...receipt, product_list: updatedProducts });
     }
-    
+
   };
 
 
@@ -71,6 +71,13 @@ function NewForm() {
     // When the button is clicked, add a new product to the state
     setProducts([...products, { name: '', cost: 0, taxable: "" }]);
   };
+
+  const removeProduct = () => {
+    if (products.length > 1) {
+      setProducts(products.filter((_, index) => index !== products.length - 1));
+    }
+  };
+  
 
 
   useEffect(() => {
@@ -104,13 +111,13 @@ function NewForm() {
 
       setGrandTotal(cost.toFixed(2))
       setTotalTax(totTAX.toFixed(2))
-      setreceipt({ ...receipt, "total": grandTotal, total_tax: totalTax})
+      setreceipt({ ...receipt, "total": grandTotal, total_tax: totalTax })
 
     }
     totalCostProducts();
-  }, [products, grandTotal,setProducts, totalTax, receipt.tax_Amount]);
+  }, [products, grandTotal, setProducts, totalTax, receipt.tax_Amount]);
 
- console.log(receipt)
+  console.log(receipt)
 
   console.log(products)
 
@@ -135,7 +142,7 @@ function NewForm() {
     navigate("/receipts")
 
   }
- 
+
   return (
 
     <div className="parent">
@@ -183,7 +190,8 @@ function NewForm() {
               required
             />%
 
-            <div className="addProductButton" style={{ color: "yellow", borderRadius: "10px", paddingTop: "3px", backgroundColor: "purple", width: "150px", height: "35px" }} onClick={addProduct}>Add Product</div>
+            <div className="addProductButton" style={{ color: "white", borderRadius: "10px", paddingTop: "7px", backgroundColor: "purple", width: "150px", height: "35px",border:"solid white" }} onClick={addProduct}>Add Product</div>
+            <div className="addProductButton" style={{ color: "white", borderRadius: "10px", paddingTop: "7px", backgroundColor: "purple", width: "150px", height: "35px",border:"solid white" }} onClick={removeProduct}>Remove Product</div>
             <ul>
               {products.map((product, index) => (
                 <li key={index}>
@@ -208,8 +216,8 @@ function NewForm() {
                       value={product.taxable}
                       onChange={(e) => handleTextChange(e, 'taxable', index)}
                     >
-                                            
-                     <option value="">select from options</option>
+
+                      <option value="">select from options</option>
                       <option value="include">Include</option>
                       <option value="true">Yes</option>
                       <option value="false">No</option>
@@ -227,7 +235,7 @@ function NewForm() {
           </Link>
         </div>
       </div>
-      <div   className="calculations">
+      <div className="calculations">
         <h3>GRAND TOTAL</h3>
         <h3><strong>${grandTotal}</strong></h3>
         <div>Tax Collected</div>
