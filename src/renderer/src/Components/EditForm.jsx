@@ -207,7 +207,7 @@ console.log(totalTax)
             required
           />%
 
-          <div style={{ color: "yellow", backgroundColor: "purple",width:"150px",height:"25px" }} onClick={addProduct}>Add Product</div>
+          {/* <div style={{ color: "yellow", backgroundColor: "purple",width:"150px",height:"25px" }} onClick={addProduct}>Add Product</div> */}
           <ul>
             {receipt.product_list.map((prod, index) => (
               <li key={index}>
