@@ -7,13 +7,17 @@ const DownloadPDFButton = () => {
 
     const formatEntry = (entry) => {
       return `
-        ID: ${entry.id}
-        Product_list: ${entry.product_list}
-        Description: ${entry.receipt_description}
-        Grand_Total: ${entry.total}
-        Tax_Amount: ${entry.tax_Amount}
-        Date: ${entry.date}
-        -------------------------------
+      ID: ${entry.id} 
+      Date: ${entry.date}
+      Product_list: ${entry.product_list.map(x=>{
+          return(
+      "\n" + `${x.name} --- ${x.cost}`+"\n"
+          )
+      })}
+      Description: ${entry.receipt_description}
+      Grand_Total: ${entry.total}
+      Tax_Amount: ${entry.tax_Amount}
+      -------------------------------
       `;
     };
 

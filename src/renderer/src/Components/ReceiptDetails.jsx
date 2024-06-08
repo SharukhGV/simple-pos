@@ -5,7 +5,7 @@ import DownloadReceipt from "./DownloadReceipt";
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import { forwardRef } from "react";
-function ReceiptDetails({ individualreceipts, index, toggleTheme,theme,setTheme }) {
+function ReceiptDetails({ individualreceipts, index, toggleTheme, theme, setTheme }) {
   const { id } = useParams();
 
   const [receipt9, setreceipt9] = useState([])
@@ -35,7 +35,7 @@ function ReceiptDetails({ individualreceipts, index, toggleTheme,theme,setTheme 
   let newObj = JSON.parse(window.localStorage.getItem("dataJSON"));
 
   let receipt = getObjectSpecific(newObj, id)
-console.log(receipt)
+  console.log(receipt)
 
 
   useEffect(() => {
@@ -77,100 +77,101 @@ console.log(receipt)
     color: thecolor,
   };
 
-function printPage(){
-  window.print()
-}
+  function printPage() {
+    window.print()
+  }
 
-	// function renderLOGO() {
-	// 	if (theme === "light") {
+  // function renderLOGO() {
+  // 	if (theme === "light") {
   //     printPage()
 
-	// 		return (<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Friendly Printing</div>)
-	// 	}
-	// 	if (theme === "dark") {
+  // 		return (<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Friendly Printing</div>)
+  // 	}
+  // 	if (theme === "dark") {
 
 
 
-	// 		return (
-	// 		<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Print Unfriendly</div>
+  // 		return (
+  // 		<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Print Unfriendly</div>
 
-	// 		)
-	// 	}
-	// }
+  // 		)
+  // 	}
+  // }
 
 
-  function renderBusinessEntitInfo(){
+  function renderBusinessEntitInfo() {
     let businessNAME = localStorage.getItem("businessName") || null
     let businessLicense = localStorage.getItem("licenseNumbers") || null
-return(
-  <>
-  <p>{businessNAME}</p>
-  <p>{businessLicense}</p>
+    return (
+      <>
+        <p>{businessNAME}</p>
+        <p>{businessLicense}</p>
 
-  </>
-)
+      </>
+    )
   }
   console.log(receipt.product_list)
 
 
 
-  
+
   const ComponentToPrint = forwardRef((props, ref) => (
     <div ref={ref}>
-     <table  style={{background:"white",color:"black", margin:"auto"}}>
-  <tr>
-    <th>Category</th>
-    <th>Value</th>
-  </tr>
+      <table style={{ background: "white", color: "black", margin: "auto" }}>
+        <tr>
+          <th>Category</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td>ID</td>
+          <td>{receipt.id}</td>
+        </tr>
+        <tr>
+          <td>Store Info</td>
+          <td>{renderBusinessEntitInfo()}</td>
+        </tr>
 
-  <tr>
-    <td>Store Info</td>
-    <td>{renderBusinessEntitInfo()}</td>
-  </tr>
-  <tr>
-    <td>ID</td>
-    <td>{receipt.id}</td>
-  </tr>
-  <tr>
-    <td>Date</td>
-    <td>{receipt.date}</td>
-  </tr>
-  <tr>
-    <td>Total Tax Collected</td>
-    <td>{receipt.total_tax}</td>
-  </tr>
-  <tr>
-    <td>Headline</td>
-    <td>{receipt.name}</td>
-  </tr>
-  <tr>
-    <td>Description</td>
-    <td>{receipt.receipt_description}</td>
-  </tr>
-  <tr>
-    <td>Grand Total</td>
-    <td>{receipt.total}</td>
-  </tr>
-  <tr>
-    <td>Tax Amount</td>
-    <td>{receipt.tax_Amount}</td>
-  </tr>
-  <tr>
-    <td>Product List</td>
-    <td>{receipt.product_list.map(product=>{
-  return(
-<p>{product.name} ... ${product.cost} USD</p>
-  )
-}
-)}</td>
-  </tr>
-</table>
+        <tr>
+          <td>Date</td>
+          <td>{receipt.date}</td>
+        </tr>
+
+        <tr>
+          <td>Headline</td>
+          <td>{receipt.name}</td>
+        </tr>
+        <tr>
+          <td>Description</td>
+          <td>{receipt.receipt_description}</td>
+        </tr>
+        <tr>
+          <td>Product List</td>
+          <td>{receipt.product_list.map(product => {
+            return (
+              <p>{product.name} ... ${product.cost} USD</p>
+            )
+          }
+          )}</td>
+        </tr>
+        <tr>
+          <td>Tax Amount</td>
+          <td>{receipt.tax_Amount}</td>
+        </tr>
+        <tr>
+          <td>Total Tax Collected</td>
+          <td>{receipt.total_tax}</td>
+        </tr>  <tr>
+          <td>Grand Total</td>
+          <td>{receipt.total}</td>
+        </tr>
+
+      </table>
     </div>
   ));
-  
+
   function PrintComponent() {
     const componentRef = useRef();
-  
+
     return (
       <div>
         <ComponentToPrint ref={componentRef} />
@@ -181,8 +182,8 @@ return(
       </div>
     );
   }
-  
-  
+
+
 
   return (
     <div className="printFriendly">
@@ -191,7 +192,7 @@ return(
       <div className="spacerDIV"></div>
 
       <article className="thedreamtable" key={receipt9.id}>
-{PrintComponent()}
+        {PrintComponent()}
 
         <div className="showNavigation">
           <span>
@@ -210,8 +211,8 @@ return(
             </button>
           </span>
         </div>
-<DownloadReceipt receipt9={receipt9}/>
-{/* <button onClick={()=>{window.print()}}>Print Page</button> */}
+        <DownloadReceipt receipt9={receipt9} />
+        {/* <button onClick={()=>{window.print()}}>Print Page</button> */}
       </article>
 
     </div>
