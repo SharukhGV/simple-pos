@@ -26,10 +26,13 @@
         margin-right: 10px;
         background: rgba(18, 56, 87, 0.934);
         border: solid black;
+      border-radius: 10px;
+
     }
 
     .calculations input { 
       background-color: green;
       border: solid white;
+    
         
     }
