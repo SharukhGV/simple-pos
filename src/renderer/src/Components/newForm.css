@@ -26,7 +26,7 @@
         margin-right: 10px;
         background: rgb(14,48,75);
         background: radial-gradient(circle, rgba(14,48,75,1) 0%, rgba(3,179,219,1) 80%, rgba(0,212,255,1) 100%);
-        
+        border: solid black;
     }
 
     .calculations input { 
