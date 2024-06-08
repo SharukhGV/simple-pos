@@ -1,7 +1,7 @@
 {
-  "name": "dream-journal-bio",
+  "name": "simple-pos",
   "version": "1.0.0",
-  "description": "An Electron application with React",
+  "description": "A simple point of sale system",
   "main": "./out/main/index.js",
   "author": "Sharukh G. Velupillai",
   "homepage": "https://sgvcreations.com/",
@@ -23,8 +23,7 @@
     "@electron-toolkit/preload": "^3.0.0",
     "@electron-toolkit/utils": "^3.0.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "react-to-print": "^2.15.1",
-    "teleprint": "^2.1.0"
+    "react-to-print": "^2.15.1"
   },
   "devDependencies": {
     "@electron-toolkit/eslint-config": "^1.0.2",

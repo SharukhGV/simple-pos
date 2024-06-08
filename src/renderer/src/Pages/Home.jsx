@@ -29,8 +29,7 @@ if(!!fileData){
       <div className="homePAge">
       
         <h1>Simple POS</h1>
-        <p>Simplicity. Privacy. Truth</p>
-    
+<p>A Receipt and Sales Tracker for Small Businesses</p>    
         <p style={pixstyle2}>    
 
 

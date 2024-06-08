@@ -227,7 +227,7 @@ function NewForm() {
           </Link>
         </div>
       </div>
-      <div style={{ border: "solid white", backgroundColor: "darkblue" }} className="calculations">
+      <div   className="calculations">
         <h3>GRAND TOTAL</h3>
         <h3><strong>${grandTotal}</strong></h3>
         <div>Tax Collected</div>
