@@ -1,35 +1,30 @@
-# electron-app
+# Simple-POS
 
-An Electron application with React
+A simple receipt maker and sales tracker
 
-## Recommended IDE Setup
 
-- [VSCode](https://code.visualstudio.com/) + [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) + [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+## Index Page with Search
 
-## Project Setup
+![index page](./rappindex.PNG)
 
-### Install
 
-```bash
-$ npm install
-```
+
+## View Receipt Page with Printing
+
+![View Receipts](./rappview2.PNG)
+
+A user may search for a receipt from its ID. All receipts appear here.
+
+
+### New Form Page
+
+![New Form Page](./rappform.PNG)
+
+This page is where a specific receipt post can be viewed and printed, or edited.
 
 ### Development
 
-```bash
-$ npm run dev
-```
+This app is without a database and functions on localStorage. About 6000 entries can be logged on this app according to AI estimates such as from ChatGPT. This app is tested to work, but 6000 entries is untested. There may be small bugs and this application is in continual development. 
 
-### Build
+UI/UX design was not considered greatly, as functionality was primary focus on this application. Despite this fact, will continue to make the application user friendly and think about edge cases and other helpful additions to app to make receipt making process easier and more efficient. 
 
-```bash
-# For windows
-$ npm run build:win
-
-# For macOS
-$ npm run build:mac
-
-# For Linux
-$ npm run build:linux
-```
-# simple-pos
