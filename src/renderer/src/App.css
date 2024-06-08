@@ -464,4 +464,15 @@ border-radius: 50%;
     background-color: darkred;
   }
 
-  
+  .tableReceipt{
+    margin: auto;
+
+  }
+  .tableReceipt tr{
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+  }
+  .tableReceipt tr:nth-child(even){
+    background-color: #00ff8c;
+    color: black;
+  }

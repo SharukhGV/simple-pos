@@ -117,7 +117,7 @@ function ReceiptDetails({ individualreceipts, index, toggleTheme, theme, setThem
 
   const ComponentToPrint = forwardRef((props, ref) => (
     <div ref={ref}>
-      <table style={{ background: "white", color: "black", margin: "auto" }}>
+      <table className="tableReceipt">
         <tr>
           <th>Category</th>
           <th>Value</th>
@@ -191,7 +191,7 @@ function ReceiptDetails({ individualreceipts, index, toggleTheme, theme, setThem
 
       <div className="spacerDIV"></div>
 
-      <article className="thedreamtable" key={receipt9.id}>
+      <article  key={receipt9.id}>
         {PrintComponent()}
 
         <div className="showNavigation">
