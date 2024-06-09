@@ -189,10 +189,11 @@ function NewForm() {
               onChange={(e) => handleTextChange(e, 'tax_Amount')}
               required
             />%
-
-            <div className="addProductButton" style={{ color: "white", borderRadius: "10px", paddingTop: "7px", backgroundColor: "purple", width: "150px", height: "35px",border:"solid white" }} onClick={addProduct}>Add Product</div>
-            <div className="addProductButton" style={{ color: "white", borderRadius: "10px", paddingTop: "7px", backgroundColor: "purple", width: "150px", height: "35px",border:"solid white" }} onClick={removeProduct}>Remove Product</div>
-            <ul>
+<br></br>
+<br></br><div style={{display:"flex"}}>
+            <div className="addProductButton" style={{ color: "white", borderRadius: "10px", paddingTop: "7px", backgroundColor: "purple", width: "150px", height: "35px",border:"solid white",textAlign:"center", margin:"auto" }} onClick={addProduct}>Add Product</div>
+            <div className="addProductButton" style={{ color: "white", borderRadius: "10px", paddingTop: "7px", backgroundColor: "purple", width: "150px", height: "35px",border:"solid white",textAlign:"center", margin:"auto" }} onClick={removeProduct}>Remove Product</div>
+           </div><ul>
               {products.map((product, index) => (
                 <li key={index}>
                   <input
@@ -231,7 +232,7 @@ function NewForm() {
           </form>
 
           <Link to={`/receipts `}>
-            <button className="backButton">Go Back to All Receipts!</button>
+            <button style={{width:"250px"}} className="backButton">Go Back to All Receipts!</button>
           </Link>
         </div>
       </div>
