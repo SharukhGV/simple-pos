@@ -1,5 +1,5 @@
 appId: com.electron.app
-productName: Dream Journal Bio
+productName: Simple POS
 directories:
   buildResources: build
 files:
