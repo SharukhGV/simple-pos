@@ -15,19 +15,19 @@ function Receipts({ fileData }) {
   }, [])
 
 
-const [query, setQuery]= useState("")
-  function handletextChangeSearch(e){
-setQuery(e.target.value)
+  const [query, setQuery] = useState("")
+  function handletextChangeSearch(e) {
+    setQuery(e.target.value)
   }
-  const filterById = dreams7.filter((product)=>{
-   return product.id.includes(query)
+  const filterById = dreams7.filter((product) => {
+    return product.id.includes(query) || null
   })
   return (
 
     <div className="cardContact">
       <h1>All Receipts</h1>
       <div>Your Receipts are stored locally. You can choose to download your data as a PDF (for your records) or JSON File (for reupload). This app utilizes local storage instead of an external database. </div>
-<input type="text" onChange={handletextChangeSearch} value ={query}></input>
+      <input type="text" onChange={handletextChangeSearch} value={query}></input>
       <div className="cardContact">
 
         <table className="thedreamtable">
@@ -42,26 +42,26 @@ setQuery(e.target.value)
             return (
 
               <tbody>
-              <tr>
+                <tr>
                   <td>{receipt.date}</td>
-              <td><Link to={`/receipts/${receipt.id}`}>{receipt.id}</Link>
-          </td>
-              <td>{receipt.total}</td>
-              </tr>
+                  <td><Link to={`/receipts/${receipt.id}`}>{receipt.id}</Link>
+                  </td>
+                  <td>{receipt.total}</td>
+                </tr>
               </tbody>
             );
           })}</>
-:
-dreams7.map((receipt) => {
+            :
+            dreams7.map((receipt) => {
 
-  return (
+              return (
 
-    <Receipt
-      key={receipt.id} receipt={receipt}
-    />
-  );
-})}
-        
+                <Receipt
+                  key={receipt.id} receipt={receipt}
+                />
+              );
+            })}
+
 
         </table>
         <DownloadPDFButton />

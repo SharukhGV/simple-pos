@@ -9,10 +9,10 @@ const DownloadPDFButton = () => {
       return `
       ID: ${entry.id} 
       Date: ${entry.date}
-      Product_list: ${entry.product_list.map(x=>{
-          return(
-      "\n" + `${x.name} --- ${x.cost}`+"\n"
-          )
+      Product_list: ${entry.product_list.map(x => {
+        return (
+          "\n" + `${x.name} --- ${x.cost}` + "\n"
+        )
       })}
       Description: ${entry.receipt_description}
       Grand_Total: ${entry.total}
@@ -24,7 +24,7 @@ const DownloadPDFButton = () => {
     const formattedData = dataFromLocalStorage.map(formatEntry).join('\n');
 
     const doc = new jsPDF();
-    doc.setFontSize(10); 
+    doc.setFontSize(10);
 
     const lines = doc.splitTextToSize(formattedData, doc.internal.pageSize.getWidth() - 20);
     let cursorY = 10;
@@ -41,9 +41,9 @@ const DownloadPDFButton = () => {
   };
 
   return (
- 
-      <button style={{ backgroundColor: "#ccffff", color: "black" }} onClick={handleDownloadPDF}>💻 Download Data as PDF 📝</button>
-   
+
+    <button style={{ backgroundColor: "#ccffff", color: "black" }} onClick={handleDownloadPDF}>💻 Download Data as PDF 📝</button>
+
   );
 };
 

@@ -30,31 +30,31 @@ function App() {
   }, [theme]);
 
 
-useEffect(()=>{
+  useEffect(() => {
 
-  if(window.localStorage.getItem("dataJSON")){
+    if (window.localStorage.getItem("dataJSON")) {
 
       window.localStorage.getItem("dataJSON");
 
-  }else{
-  window.localStorage.setItem("dataJSON", JSON.stringify([]));
-  }
-},[])
+    } else {
+      window.localStorage.setItem("dataJSON", JSON.stringify([]));
+    }
+  }, [])
 
   return (
     <Router>
-    <Nav toggleTheme={toggleTheme} theme={theme} setTheme={setTheme} />
-    <Routes>
-      <Route path="/" element={<Home fileData={fileData} setFileData={setFileData} />} />
-      <Route path="/receipts" element={<Receipts fileData={fileData} />} />
-      <Route path="/receipts/:id" element={<ReceiptDetails toggleTheme={toggleTheme} theme={theme} setTheme={setTheme} />} />
-      <Route path="/receipts/:id/edit" element={<EditForm />} />
-      <Route path="/receipts/new" element={<NewForm />} />
-      <Route path="/storeinfo" element={<StoreInfo />} />
+      <Nav toggleTheme={toggleTheme} theme={theme} setTheme={setTheme} />
+      <Routes>
+        <Route path="/" element={<Home fileData={fileData} setFileData={setFileData} />} />
+        <Route path="/receipts" element={<Receipts fileData={fileData} />} />
+        <Route path="/receipts/:id" element={<ReceiptDetails toggleTheme={toggleTheme} theme={theme} setTheme={setTheme} />} />
+        <Route path="/receipts/:id/edit" element={<EditForm />} />
+        <Route path="/receipts/new" element={<NewForm />} />
+        <Route path="/storeinfo" element={<StoreInfo />} />
 
-      <Route path="*" element={<NotFound />} />
-    </Routes>
-  </Router>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 

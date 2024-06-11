@@ -1,0 +1,18 @@
+[
+    {
+        "id": "",
+        "name": "",
+        "product_list": [
+            {
+                "name": "",
+                "cost": 0,
+                "taxable": ""
+            }
+        ],
+        "total": "",
+        "date": "",
+        "tax_Amount": "",
+        "receipt_description": "",
+        "total_tax": ""
+    }
+]

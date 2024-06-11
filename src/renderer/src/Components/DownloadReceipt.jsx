@@ -1,7 +1,7 @@
 import React from 'react';
 import jsPDF from 'jspdf';
 
-function DownloadReceipt({receipt9}) {
+function DownloadReceipt({ receipt9 }) {
   const handleDownloadPDF = () => {
     const dataFromLocalStorage = receipt9
 
@@ -9,11 +9,11 @@ function DownloadReceipt({receipt9}) {
       return `
         ID: ${entry.id} 
         Date: ${entry.date}
-        Product_list: ${entry.product_list.map(x=>{
-            return(
-        "\n" + `${x.name} --- ${x.cost}`+"\n"
-            )
-        })}
+        Product_list: ${entry.product_list.map(x => {
+        return (
+          "\n" + `${x.name} --- ${x.cost}` + "\n"
+        )
+      })}
         Description: ${entry.receipt_description}
         Grand_Total: ${entry.total}
         Tax_Amount: ${entry.tax_Amount}
@@ -24,7 +24,7 @@ function DownloadReceipt({receipt9}) {
     const formattedData = formatEntry(dataFromLocalStorage);
 
     const doc = new jsPDF();
-    doc.setFontSize(10); 
+    doc.setFontSize(10);
 
     const lines = doc.splitTextToSize(formattedData, doc.internal.pageSize.getWidth() - 20);
     let cursorY = 10;
@@ -41,9 +41,9 @@ function DownloadReceipt({receipt9}) {
   };
 
   return (
- 
-      <button  onClick={handleDownloadPDF}> Download Data as PDF </button>
-   
+
+    <button onClick={handleDownloadPDF}> Download Data as PDF </button>
+
   );
 };
 

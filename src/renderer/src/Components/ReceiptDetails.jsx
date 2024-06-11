@@ -191,7 +191,7 @@ function ReceiptDetails({ individualreceipts, index, toggleTheme, theme, setThem
 
       <div className="spacerDIV"></div>
 
-      <article  key={receipt9.id}>
+      <article key={receipt9.id}>
         {PrintComponent()}
 
         <div className="showNavigation">

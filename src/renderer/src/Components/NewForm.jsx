@@ -77,7 +77,7 @@ function NewForm() {
       setProducts(products.filter((_, index) => index !== products.length - 1));
     }
   };
-  
+
 
 
   useEffect(() => {
@@ -102,7 +102,8 @@ function NewForm() {
 
       let includeTaxAmount = products
         .filter((x) => x.taxable === "include")
-        .map((z) => totTAX += (z.cost - (z.cost / (1 + (receipt.tax_Amount / 100)))));
+        .map((z) => totTAX += (((z.cost * (1 + (receipt.tax_Amount * .01)))) - z.cost));
+
       let trueTaxArray = products
         .filter((x) => x.taxable === "true")
         .map((z) => {
@@ -189,11 +190,11 @@ function NewForm() {
               onChange={(e) => handleTextChange(e, 'tax_Amount')}
               required
             />%
-<br></br>
-<br></br><div style={{display:"flex"}}>
-            <div className="addProductButton" style={{ color: "white", borderRadius: "10px", paddingTop: "7px", backgroundColor: "purple", width: "150px", height: "35px",border:"solid white",textAlign:"center", margin:"auto" }} onClick={addProduct}>Add Product</div>
-            <div className="addProductButton" style={{ color: "white", borderRadius: "10px", paddingTop: "7px", backgroundColor: "purple", width: "150px", height: "35px",border:"solid white",textAlign:"center", margin:"auto" }} onClick={removeProduct}>Remove Product</div>
-           </div><ul>
+            <br></br>
+            <br></br><div style={{ display: "flex" }}>
+              <div className="addProductButton" style={{ color: "white", borderRadius: "10px", paddingTop: "7px", backgroundColor: "purple", width: "150px", height: "35px", border: "solid white", textAlign: "center", margin: "auto" }} onClick={addProduct}>Add Product</div>
+              <div className="addProductButton" style={{ color: "white", borderRadius: "10px", paddingTop: "7px", backgroundColor: "purple", width: "150px", height: "35px", border: "solid white", textAlign: "center", margin: "auto" }} onClick={removeProduct}>Remove Product</div>
+            </div><ul>
               {products.map((product, index) => (
                 <li key={index}>
                   <input
@@ -228,11 +229,11 @@ function NewForm() {
                 </li>
               ))}
             </ul>
-            <input type="submit" />
+            <input style={{ width: "250px" }} type="submit" />
           </form>
 
           <Link to={`/receipts `}>
-            <button style={{width:"250px"}} className="backButton">Go Back to All Receipts!</button>
+            <button style={{ width: "250px" }} className="backButton">Go Back to All Receipts!</button>
           </Link>
         </div>
       </div>
