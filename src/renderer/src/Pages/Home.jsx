@@ -25,7 +25,7 @@ function Home({ fileData, setFileData }) {
 
 
   return (
-    <div className="cardContact">
+    <div style={{marginLeft:"15px",marginRight:"15px"}}className="cardContact">
 
       <div className="homePAge">
 

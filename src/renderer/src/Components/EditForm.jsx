@@ -74,7 +74,14 @@ function EditForm() {
       updatedProducts[index].taxable = value;
       setProducts(updatedProducts);
       setreceipt({ ...receipt, 'product_list': [...products] })
+      if (updatedProducts[index].taxable === "include") {
+  
+        let costDeductTaxInclusive = (parseFloat(updatedProducts[index].cost) / ((1 + (receipt.tax_Amount * .01))));
+        updatedProducts[index].cost = costDeductTaxInclusive.toFixed(2)
+        setProducts(updatedProducts);
+        setreceipt({ ...receipt, product_list: updatedProducts });
 
+      }
     }
   };
 
@@ -128,12 +135,13 @@ function EditForm() {
 
       let includeTaxArray = products
         .filter((y) => y.taxable === "include")
-        .map((x) => cost += x.cost);
+        .map((x) => cost += (x.cost*(1+receipt.tax_Amount*.01)));
 
 
       let includeTaxAmount = products
         .filter((x) => x.taxable === "include")
-        .map((z) => totTAX += (z.cost - (z.cost / (1 + (receipt.tax_Amount / 100)))));
+        .map((z) => totTAX += (((z.cost * (1 + (receipt.tax_Amount * .01)))) - z.cost));
+
       let trueTaxArray = products
         .filter((x) => x.taxable === "true")
         .map((z) => {
@@ -146,8 +154,7 @@ function EditForm() {
 
     }
     totalCostProducts();
-  }, [products, grandTotal, totalTax, receipt.tax_Amount]);
-
+  }, [products, grandTotal, setProducts, totalTax, receipt.tax_Amount]);
 
 
   const handleSubmit = (event) => {

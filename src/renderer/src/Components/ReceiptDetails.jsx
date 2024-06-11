@@ -137,7 +137,7 @@ function ReceiptDetails({ individualreceipts, index, toggleTheme, theme, setThem
         </tr>
 
         <tr>
-          <td>Headline</td>
+          <td>Name</td>
           <td>{receipt.name}</td>
         </tr>
         <tr>

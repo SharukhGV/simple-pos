@@ -24,10 +24,10 @@ function Receipts({ fileData }) {
   })
   return (
 
-    <div className="cardContact">
+    <div style={{marginLeft:"15px",marginRight:"15px"}} className="cardContact">
       <h1>All Receipts</h1>
       <div>Your Receipts are stored locally. You can choose to download your data as a PDF (for your records) or JSON File (for reupload). This app utilizes local storage instead of an external database. </div>
-      <input type="text" onChange={handletextChangeSearch} value={query}></input>
+      <input type="text" onChange={handletextChangeSearch} placeholder="Search by id..." value={query}></input>
       <div className="cardContact">
 
         <table className="thedreamtable">

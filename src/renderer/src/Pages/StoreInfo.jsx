@@ -31,7 +31,7 @@ function StoreInfo() {
     }
 
     return (
-        <>
+        <div style={{maxWidth:"500px", margin:"auto"}}>
             <form onSubmit={onsubmitBusinessEntity}>
                 <h3>Information Submitted Will appear on Receipt. To Overwrite, just resubmit</h3>
                 <input type="text" onChange={handletextchange} value={storeName} placeholder="Enter Business Name"></input>
@@ -41,7 +41,7 @@ function StoreInfo() {
                 <input type="submit"></input>
 
             </form>
-        </>
+        </div>
     )
 
 }

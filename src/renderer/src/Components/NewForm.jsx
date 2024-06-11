@@ -61,9 +61,22 @@ function NewForm() {
       updatedProducts[index].taxable = value;
       setProducts(updatedProducts);
       setreceipt({ ...receipt, product_list: updatedProducts });
+      if (updatedProducts[index].taxable === "include") {
+  
+        let costDeductTaxInclusive = (parseFloat(updatedProducts[index].cost) / ((1 + (receipt.tax_Amount * .01))));
+        updatedProducts[index].cost = costDeductTaxInclusive.toFixed(2)
+        setProducts(updatedProducts);
+        setreceipt({ ...receipt, product_list: updatedProducts });
+
+      }}
+      else {
+        const updatedProducts = [...products];
+        updatedProducts[index].taxable = value;
+        setProducts(updatedProducts);
+        setreceipt({ ...receipt, product_list: updatedProducts });
+      }
     }
 
-  };
 
 
 
@@ -97,7 +110,7 @@ function NewForm() {
 
       let includeTaxArray = products
         .filter((y) => y.taxable === "include")
-        .map((x) => cost += x.cost);
+        .map((x) => cost += (x.cost*(1+receipt.tax_Amount*.01)));
 
 
       let includeTaxAmount = products
@@ -220,9 +233,9 @@ function NewForm() {
                     >
 
                       <option value="">select from options</option>
-                      <option value="include">Include</option>
-                      <option value="true">Yes</option>
-                      <option value="false">No</option>
+                      <option value="include">Include Tax in Price</option>
+                      <option value="true">Yes, add Tax on top</option>
+                      <option value="false">No, do not Tax</option>
 
                     </select>
                   </label>
