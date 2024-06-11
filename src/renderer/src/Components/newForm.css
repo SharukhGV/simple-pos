@@ -1,3 +1,6 @@
+
+@media  (min-width: 651px) {
+
 .parent {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -37,3 +40,45 @@
 
 
 }
+}
+
+@media (min-width:0px) and (max-width: 650px) {
+
+  .parent {  display: flex;
+      justify-content: center;
+      align-items: center;
+          flex-direction: column;
+
+    }
+    
+
+    .product {
+      margin-left: 10px;
+      margin-right: 10px;
+    
+    }
+    
+
+    
+    .calculations {
+    
+      font-size: 20px;
+      padding: "10px";
+      margin-left: 10px;
+      margin-right: 10px;
+      background: rgba(18, 56, 87, 0.934);
+      border: solid black;
+      border-radius: 10px;
+    
+    }
+    
+    .calculations input {
+      background-color: green;
+      border: solid white;
+    
+    
+    }
+
+      
+    }
+   
