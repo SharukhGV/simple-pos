@@ -1,20 +1,22 @@
 name: simple-pos
-version: '1.0.0'
 summary: Simple POS
 description: |
   Simple POS is an easy-to-use Point of Sale system designed for small businesses.
-
+version: '1.0.0'
 grade: stable
 confinement: strict
+base: core22
 
 apps:
   simple-pos:
     command: desktop-launch $SNAP/simple-pos/simple-pos
-    plugs:
+    plugs: 
       - home
+      - network
+      - network-bind
+      - removable-media
       - x11
       - unity7
-      - network
       - gsettings
       - pulseaudio
       - opengl
@@ -32,7 +34,7 @@ parts:
     override-build: |
       npm install
       npm run build
-      electron-builder --linux snap --config.snap.snapcraft-prefer-global-dirs=true --config.snap.features.layout=snap
+      npx electron-builder --linux snap --config.snap.snapcraft-prefer-global-dirs=true --config.snap.features.layout=snap
       mkdir -p $SNAPCRAFT_PART_INSTALL/simple-pos
       cp -r dist/* $SNAPCRAFT_PART_INSTALL/simple-pos/
     build-packages:
@@ -41,7 +43,7 @@ parts:
 
   electron-launch:
     plugin: dump
-    source: https://github.com/SharukhGV/simple-pos.git
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
     source-subdir: gtk
     stage:
       - bin
@@ -55,12 +57,16 @@ parts:
 plugs:
   home:
     interface: home
+  network:
+    interface: network
+  network-bind:
+    interface: network-bind
+  removable-media:
+    interface: removable-media
   x11:
     interface: x11
   unity7:
     interface: unity7
-  network:
-    interface: network
   gsettings:
     interface: gsettings
   pulseaudio:
