@@ -32,8 +32,7 @@ apps:
 
 parts:
   simple-pos:
-    plugin: npm
-    node-engine: 18.13.0
+    plugin: nodejs
     source: https://github.com/SharukhGV/simple-pos.git
     source-type: git
     override-build: |
@@ -42,9 +41,7 @@ parts:
       npx electron-builder --linux snap --config.snap.snapcraft-prefer-global-dirs=true --config.snap.features.layout=snap
       mkdir -p $SNAPCRAFT_PART_INSTALL/simple-pos
       cp -r dist/* $SNAPCRAFT_PART_INSTALL/simple-pos/
-    build-packages:
-      - nodejs
-      - npm
+    nodejs-version: 18.13.0
 
   electron-launch:
     plugin: dump
