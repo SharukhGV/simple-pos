@@ -65,7 +65,7 @@ function EditForm() {
 
     } else if (fieldName === 'productCost') {
       const updatedProducts = [...products];
-      updatedProducts[index].cost = parseFloat(value);
+      updatedProducts[index].cost = Number(value);
       setProducts(updatedProducts);
       setreceipt({ ...receipt, 'product_list': [...products] })
 
@@ -76,7 +76,7 @@ function EditForm() {
       setreceipt({ ...receipt, 'product_list': [...products] })
       if (updatedProducts[index].taxable === "include") {
   
-        let costDeductTaxInclusive = (parseFloat(updatedProducts[index].cost) / ((1 + (receipt.tax_Amount * .01))));
+        let costDeductTaxInclusive = (Number(updatedProducts[index].cost) / ((1 + (Number(receipt.tax_Amount) * .01))));
         updatedProducts[index].cost = costDeductTaxInclusive.toFixed(2)
         setProducts(updatedProducts);
         setreceipt({ ...receipt, product_list: updatedProducts });
@@ -126,30 +126,30 @@ function EditForm() {
       let totalArray = products
         .filter((y) => y.taxable === "true")
         .map((x) => {
-          cost += (x.cost + (x.cost * (receipt.tax_Amount * .01)))
+          cost += (Number(x.cost) + (Number(x.cost) * (Number(receipt.tax_Amount) * .01)))
         });
 
       let noTaxArray = products
         .filter((y) => y.taxable === "false")
-        .map((x) => cost += x.cost);
+        .map((x) => cost += Number(x.cost));
 
       let includeTaxArray = products
         .filter((y) => y.taxable === "include")
-        .map((x) => cost += (x.cost*(1+receipt.tax_Amount*.01)));
+        .map((x) => cost += (Number(x.cost)*(1+ Number(receipt.tax_Amount)*.01)));
 
 
       let includeTaxAmount = products
         .filter((x) => x.taxable === "include")
-        .map((z) => totTAX += (((z.cost * (1 + (receipt.tax_Amount * .01)))) - z.cost));
+        .map((z) => totTAX += (((Number(z.cost) * (1 + (Number(receipt.tax_Amount) * .01)))) - Number(z.cost)));
 
       let trueTaxArray = products
         .filter((x) => x.taxable === "true")
         .map((z) => {
-          totTAX += (z.cost * (receipt.tax_Amount * .01))
+          totTAX += (Number(z.cost) * (Number(receipt.tax_Amount) * .01))
         });
 
-      setGrandTotal(cost.toFixed(2))
-      setTotalTax(totTAX.toFixed(2))
+      setGrandTotal((Number(cost)).toFixed(2))
+      setTotalTax((Number(totTAX)).toFixed(2))
       setreceipt({ ...receipt, "total": grandTotal, total_tax: totalTax })
 
     }
@@ -167,7 +167,6 @@ function EditForm() {
     navigate(`/receipts/${id}`)
 
   };
-  console.log(totalTax)
   return (
     <div className="cardContact">
 
@@ -209,7 +208,7 @@ function EditForm() {
           id="tax_Amount"
           type="number"
           name="tax_Amount"
-          value={receipt.tax_Amount}
+          value={Number(receipt.tax_Amount)}
           onChange={(e) => handleTextChange(e, 'tax_Amount')}
           required
         />%

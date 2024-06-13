@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import moment from "moment";
-import DownloadReceipt from "./DownloadReceipt";
 import React, { useRef } from 'react';
 import ReactToPrint from 'react-to-print';
 import { forwardRef } from "react";
+import DownloadReceipt from "../downloadUploadFiles/DownloadReceipt";
+
 function ReceiptDetails({ individualreceipts, index, toggleTheme, theme, setTheme }) {
   const { id } = useParams();
 
@@ -80,23 +80,6 @@ function ReceiptDetails({ individualreceipts, index, toggleTheme, theme, setThem
   function printPage() {
     window.print()
   }
-
-  // function renderLOGO() {
-  // 	if (theme === "light") {
-  //     printPage()
-
-  // 		return (<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Friendly Printing</div>)
-  // 	}
-  // 	if (theme === "dark") {
-
-
-
-  // 		return (
-  // 		<div style={{width:"150px",height:"25px"}} onClick={toggleTheme}>Print Unfriendly</div>
-
-  // 		)
-  // 	}
-  // }
 
 
   function renderBusinessEntitInfo() {

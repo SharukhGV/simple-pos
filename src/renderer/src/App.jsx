@@ -7,10 +7,10 @@ import Home from "./Pages/Home";
 
 import "./App.css";
 import { useEffect } from "react";
-import Receipts from "./Components/Receipts";
-import ReceiptDetails from "./Components/ReceiptDetails";
-import EditForm from "./Components/EditForm";
-import NewForm from "./Components/NewForm";
+import Receipts from "./Components/receipts/Receipts";
+import ReceiptDetails from "./Components/receipts/ReceiptDetails";
+import EditForm from "./Components/forms/EditForm";
+import NewForm from "./Components/forms/NewForm";
 import StoreInfo from "./Pages/StoreInfo";
 
 

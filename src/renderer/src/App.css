@@ -23,20 +23,10 @@
 
 
 .dark {
-  /* background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,105,121,1) 35%, rgba(0,212,255,1) 100%); */
   color: white;
   background: #050527;
 }
 
-
-
-/* .hiddenMiddleRoute{
-    display:none;
-  } */
-/* audio::-webkit-media-controls-panel{
-    background-color: #30e73900;
-  } */
 
 .dark .cardContact {
   text-align: center;
@@ -74,9 +64,6 @@
   text-align: center;
 }
 
-/* .navBar{
-  background-color: #4caf4f03;
-} */
 .dark nav {
   background-color: #13104be4;
 }
@@ -426,36 +413,15 @@ button {
 
 }
 
-.login {
-
-  margin: auto
-    /* padding-left: 100px;
-padding-right: 100px; */
-
-}
 
 
 
-/*  */
-
-
-
-
-
-/* .audioCard{
-  background-color: #45a04916;
-} */
 
 .edit {
   background-color: #8104aa00;
 }
 
 
-/* 
-.audioCard{
-
-  background-color: rgba(0, 0, 0, 0);
-} */
 
 
 .buttonPDF {

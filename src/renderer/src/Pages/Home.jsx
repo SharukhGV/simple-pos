@@ -1,6 +1,4 @@
-
-import dreamLogo2 from "./dreamLogo2.png"
-import UploadJSON from "../Components/UploadJSON";
+import UploadJSON from "../Components/downloadUploadFiles/UploadJSON";
 // import DownloadJSON from "../Components/DownloadJSON";
 function Home({ fileData, setFileData }) {
 

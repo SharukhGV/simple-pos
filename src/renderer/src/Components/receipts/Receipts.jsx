@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import DownloadJSON from "./DownloadJSON";
-import DownloadPDFButton from "./DownloadPDFButton";
-import Receipt from "./Receipt";
 import { Link } from "react-router-dom";
+import DownloadPDFButton from "../downloadUploadFiles/DownloadPDFButton";
+import Receipt from "../receipts/Receipt";
+import DownloadJSON from "../downloadUploadFiles/DownloadJSON"
+
 function Receipts({ fileData }) {
   const [dreams7, setdreams7] = useState([]);
 
