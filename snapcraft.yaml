@@ -1,0 +1,76 @@
+name: simple-pos
+version: '1.0.0'
+summary: Simple POS
+description: |
+  Simple POS is an easy-to-use Point of Sale system designed for small businesses.
+
+grade: stable
+confinement: strict
+
+apps:
+  simple-pos:
+    command: desktop-launch $SNAP/simple-pos/simple-pos
+    plugs:
+      - home
+      - x11
+      - unity7
+      - network
+      - gsettings
+      - pulseaudio
+      - opengl
+      - browser-support
+      - wayland
+      - desktop
+      - desktop-legacy
+
+parts:
+  simple-pos:
+    plugin: nodejs
+    node-engine: 18.13.0
+    source: https://github.com/SharukhGV/simple-pos.git
+    source-type: git
+    override-build: |
+      npm install
+      npm run build:linux
+      mkdir -p $SNAPCRAFT_PART_INSTALL/simple-pos
+      cp -r dist/* $SNAPCRAFT_PART_INSTALL/simple-pos/
+    build-packages:
+      - nodejs
+      - npm
+
+  electron-launch:
+    plugin: dump
+    source: https://github.com/SharukhGV/simple-pos.git
+    source-subdir: gtk
+    stage:
+      - bin
+      - common
+      - lib
+      - lib64
+      - scripts
+    organize:
+      bin/desktop-launch: bin/desktop-launch
+
+plugs:
+  home:
+    interface: home
+  x11:
+    interface: x11
+  unity7:
+    interface: unity7
+  network:
+    interface: network
+  gsettings:
+    interface: gsettings
+  pulseaudio:
+    interface: pulseaudio
+  opengl:
+    interface: opengl
+  browser-support:
+    interface: browser-support
+  wayland:
+    interface: wayland
+  desktop:
+    interface: desktop
+  desktop-legacy:
+    interface: desktop-legacy

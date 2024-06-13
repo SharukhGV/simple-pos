@@ -168,7 +168,7 @@ function EditForm() {
 
   };
   return (
-    <div className="cardContact">
+    <div style={{marginLeft:"15px", marginRight:"15px"}} className="cardContact">
 
 
       <div className="spacerDIV"><strong>✏️ EDIT Receipt Archive 📝</strong></div>
