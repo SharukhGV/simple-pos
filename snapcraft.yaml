@@ -7,6 +7,11 @@ grade: stable
 confinement: strict
 base: core22
 
+architectures:
+  - build-on: amd64
+  - build-on: arm64
+  - build-on: armhf
+
 apps:
   simple-pos:
     command: desktop-launch $SNAP/simple-pos/simple-pos
@@ -27,7 +32,7 @@ apps:
 
 parts:
   simple-pos:
-    plugin: nodejs
+    plugin: npm
     node-engine: 18.13.0
     source: https://github.com/SharukhGV/simple-pos.git
     source-type: git
