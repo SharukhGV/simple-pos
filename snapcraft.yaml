@@ -31,7 +31,8 @@ parts:
     source-type: git
     override-build: |
       npm install
-      npm run build:linux
+      npm run build
+      electron-builder --linux snap --config.snap.snapcraft-prefer-global-dirs=true --config.snap.features.layout=snap
       mkdir -p $SNAPCRAFT_PART_INSTALL/simple-pos
       cp -r dist/* $SNAPCRAFT_PART_INSTALL/simple-pos/
     build-packages:
