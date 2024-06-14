@@ -10,13 +10,16 @@ confinement: strict
 parts:
   simple-pos:
     plugin: nodejs
+    node-version: '18.13.0'
     source: .
-    node-packages:
-      - electron
-      - vite
     build-packages:
       - nodejs
       - npm
+    override-build: |
+      set -e
+      npm install -g npm@latest
+      npm install
+      npm run build
     stage-packages:
       - libnss3
       - libnspr4
