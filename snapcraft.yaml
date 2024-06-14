@@ -1,83 +1,34 @@
 name: simple-pos
-summary: Simple POS
+version: '0.1'
+summary: A simple POS system for businesses
 description: |
-  Simple POS is an easy-to-use Point of Sale system designed for small businesses.
-version: '1.0.0'
+  A simple receipt maker and sales tracker.
+
 grade: stable
 confinement: strict
-base: core22
-
-architectures:
-  - build-on: amd64
-  - build-on: arm64
-  - build-on: armhf
-
-apps:
-  simple-pos:
-    command: desktop-launch $SNAP/simple-pos/simple-pos
-    plugs: 
-      - home
-      - network
-      - network-bind
-      - removable-media
-      - x11
-      - unity7
-      - gsettings
-      - pulseaudio
-      - opengl
-      - browser-support
-      - wayland
-      - desktop
-      - desktop-legacy
 
 parts:
   simple-pos:
-    source: https://github.com/SharukhGV/simple-pos.git
-    source-type: git
-    override-build: |
-      npm install
-      npm run build
-      npx electron-builder --linux snap --config.snap.snapcraft-prefer-global-dirs=true --config.snap.features.layout=snap
-      mkdir -p $SNAPCRAFT_PART_INSTALL/simple-pos
-      cp -r dist/* $SNAPCRAFT_PART_INSTALL/simple-pos/
+    plugin: nodejs
+    source: .
+    node-packages:
+      - electron
+      - vite
+    build-packages:
+      - nodejs
+      - npm
+    stage-packages:
+      - libnss3
+      - libnspr4
+      - libx11-xcb1
+      - libxkbfile1
 
-  electron-launch:
-    plugin: dump
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: gtk
-    stage:
-      - bin
-      - common
-      - lib
-      - lib64
-      - scripts
-    organize:
-      bin/desktop-launch: bin/desktop-launch
-
-plugs:
-  home:
-    interface: home
-  network:
-    interface: network
-  network-bind:
-    interface: network-bind
-  removable-media:
-    interface: removable-media
-  x11:
-    interface: x11
-  unity7:
-    interface: unity7
-  gsettings:
-    interface: gsettings
-  pulseaudio:
-    interface: pulseaudio
-  opengl:
-    interface: opengl
-  browser-support:
-    interface: browser-support
-  wayland:
-    interface: wayland
-  desktop:
-    interface: desktop
-  desktop-legacy:
-    interface: desktop-legacy
+apps:
+  simple-pos:
+    command: electron . --no-sandbox
+    plugs:
+      - network
+      - network-bind
+      - x11
+      - wayland
+      - home
