@@ -24,7 +24,5 @@ This page is where a specific receipt post can be viewed and printed, or edited.
 
 ### Development
 
-This app is without a database and functions on localStorage. About 6000 entries can be logged on this app according to AI estimates such as from ChatGPT. This app is tested to work, but 6000 entries is untested. There may be small bugs and this application is in continual development. 
-
-UI/UX design was not considered greatly, as functionality was primary focus on this application. Despite this fact, will continue to make the application user friendly and think about edge cases and other helpful additions to app to make receipt making process easier and more efficient. 
+This app is without a database and functions on localStorage. About 6000 entries can be logged on this app according to AI estimates such as from ChatGPT. This app is tested to work, but 6000 entries is untested. There may be small bugs and this application is in continual development.  
 
