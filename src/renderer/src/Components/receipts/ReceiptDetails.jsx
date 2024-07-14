@@ -95,6 +95,7 @@ function ReceiptDetails({ individualreceipts, index, toggleTheme, theme, setThem
   }
   console.log(receipt.product_list)
 
+  let currencycurrent = localStorage.getItem("currency")
 
 
 
@@ -131,7 +132,7 @@ function ReceiptDetails({ individualreceipts, index, toggleTheme, theme, setThem
           <td>Product List</td>
           <td>{receipt.product_list.map(product => {
             return (
-              <p>{product.name} ... ${product.cost} USD</p>
+              <p>{product.name} ... {product.cost} {currencycurrent}</p>
             )
           }
           )}</td>
