@@ -46,7 +46,6 @@ function StoreInfo() {
                 <h3>If more than one License #, separate with commas ","</h3>
 
                 <input type="text" onChange={handletextchangeLicense} value={licenseName} placeholder="Enter License Number(s)"></input>
-                <input type="submit"></input>
                 <select onChange={handleCurrencyChange} value={currency} name="currency">
   <option value="AED">United Arab Emirates Dirham (AED)</option>
   <option value="AFN">Afghan Afghani (AFN)</option>
@@ -109,7 +108,6 @@ function StoreInfo() {
   <option value="HTG">Haitian Gourde (HTG)</option>
   <option value="HUF">Hungarian Forint (HUF)</option>
   <option value="IDR">Indonesian Rupiah (IDR)</option>
-  <option value="ILS">Israeli New Shekel (ILS)</option>
   <option value="IMP">Isle of Man Pound (IMP)</option>
   <option value="INR">Indian Rupee (INR)</option>
   <option value="IQD">Iraqi Dinar (IQD)</option>
@@ -209,7 +207,10 @@ function StoreInfo() {
   <option value="ZAR">South African Rand (ZAR)</option>
   <option value="ZMW">Zambian Kwacha (ZMW)</option>
   <option value="ZWL">Zimbabwean Dollar (ZWL)</option>
-</select>
+</select>                
+
+<input type="submit"></input>
+
             </form>
         </div>
     )
